@@ -10,6 +10,7 @@ var projectPostSchema = Schema({
     otherCollaborators: String,
     privacy: String,
     date: Date,
+    date_time: Date,
     likeCount: Number,
     repostCount: Number,
     commentCount: Number,

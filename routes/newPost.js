@@ -35,13 +35,14 @@ router.post("/", isLoggedIn, async (req, res, next) => {
             otherCollaborators: collaborators,
             privacy: privacy,
             date: today,
+            date_time: Date.now(),
             likeCount: 0,
             repostCount: 0,
             commentCount: 0,
             relevance: {
                 popular: false,
                 following: false,
-                tags: ["jazz"],
+                tags: ["jazz", "electronic"],
             },
         });
         await post.save();
