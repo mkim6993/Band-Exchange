@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="./stylesheets/style.css" />
+        <script></script>
+    </head>
+    <body>
+        <div id="titleAndFollow">
+            <h4><%= title %></h4>
+        </div>
+        <div id="newPostContainer">
+            <div id="newPostWindow">
+                <form method="post" action="/newPost">
+                    <div class="info">
+                        project title: <input type="text" name="title" />
+                    </div>
+                    <div class="info">
+                        image: <input type="text" name="image" />
+                    </div>
+                    <div class="info">
+                        description: <input type="text" name="description" />
+                    </div>
+                    <div class="info">
+                        project link: <input type="text" name="link" />
+                    </div>
+                    <div class="info">
+                        add collaborators:
+                        <input type="text" name="collaborators" />
+                    </div>
+                    <div class="info">
+                        privacy options:
+                        <select name="privacy">
+                            <option value="public">public</option>
+                            <option value="private">private</option>
+                        </select>
+                    </div>
+                    <input type="submit" style="margin: 15px" />
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="./stylesheets/style.css" />
+        <script></script>
+    </head>
+    <body>
+        <div id="profileTitleAndFollow" class="bg-light">
+            <div id="profileTitle"><h4><%= username %></h4></div>
+            <img
+                src="./images/bubble.jpeg"
+                alt="image for project"
+                width="50px"
+                height="50px"
+            />
+            <div>
+                your projects:
+                <select>
+                    <option>public</option>
+                    <option>private</option>
+                    <option>liked</option>
+                    <option>reposted</option>
+                </select>
+            </div>
+            <div>hello</div>
+            <div id="followingsContainer">
+                <div id="following">
+                    <div>following</div>
+                    <div>12</div>
+                </div>
+                <div id="followers">
+                    <div>fans</div>
+                    <div>12</div>
+                </div>
+            </div>
+        </div>
+        <div id="profile">
+            <div id="profileInfo">
+                <div id="profilePicName">
+                    <img
+                        src="./images/bubble.jpeg"
+                        alt="image for project"
+                        width="80px"
+                        height="80px"
+                        id="profilePic"
+                    />
+                    <div id="userProfile"><%= username %></div>
+                </div>
+                <div id="profileDescription">
+                    This is my profile. look at my profile. (:<>) Lorem Ipsum is
+                    simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever
+                    since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book. It has
+                    survived not only five centuries, but also the leap into
+                    electronic typesetting, remaining essentially unchanged. It
+                    was popularised in the 1960s with the release of Letraset
+                    sheets containing Lorem Ipsum passages, and more recently
+                    with desktop publishing software like Aldus PageMaker
+                    including versions of Lorem Ipsum.
+                </div>
+            </div>
+            <div id="profileFeedContainer">
+                <div class="postContainer">
+                    <div class="relevanceInfo">
+                        <div class="popularLabel">popular</div>
+                        <div class="tagLabel">electronic, jazz, rock</div>
+                        <div class="following">following</div>
+                        <div class="likeContainer">
+                            <div class="postEdit">settings</div>
+                            <div id="likeCount">&nbsp13 |&nbsp</div>
+                            <div id="repostCount">6</div>
+                        </div>
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                        "
+                    >
+                        <div class="postTitle">Summer Soft&nbsp</div>
+                    </div>
+                    <div class="postImgDes">
+                        <img
+                            src="./images/bubble.jpeg"
+                            alt="image for project"
+                            width="100px"
+                            height="100px"
+                        />
+                        <div class="postDes">
+                            <div class="postInfo">
+                                <div><strong>apple</strong>&nbsp</div>
+                                <div class="date">Jun 22, 2022</div>
+                            </div>
+                            <div class="desInfo">
+                                I have worked on this project for 5 years.
+                                Someone help me with the ending. I have worked
+                                on this project for 5 years. Someone help me
+                                with the ending. I have worked on this project
+                                for 5 years. Someone help me with the ending. I
+                                have worked on this project for 5 years. Someone
+                                help me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending. I have
+                                worked on this project for 5 years. Someone help
+                                me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending. I have
+                                worked on this project for 5 years. Someone help
+                                me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="line" />
+                    <div class="interactiveBtns">
+                        <div class="comment">
+                            <div
+                                class="commentBtn"
+                                onclick="showHideComments(event)"
+                            >
+                                12 comments
+                            </div>
+                        </div>
+                        <div class="getLinkBtn" onclick="getLinkEvent()">
+                            get project link!
+                        </div>
+                        <div class="repostBtn" onclick="repostEvent()">
+                            repost
+                        </div>
+                        <div class="likeBtn" onclick="likeEvent()">like</div>
+                    </div>
+                    <div class="commentOverview" style="display: none">
+                        <div id="makeCommentContainer">
+                            <form
+                                style="
+                                    display: flex;
+                                    align-items: center;
+                                    width: 100%;
+                                    flex-direction: column;
+                                "
+                            >
+                                <textarea
+                                    placeholder="say something..."
+                                    class="commentText"
+                                ></textarea>
+                            </form>
+                        </div>
+                        <div class="commentSection">
+                            <div class="userComment">
+                                <div class="commentUserDate">
+                                    <div class="commentUsername">
+                                        <strong>katking123</strong>&nbsp
+                                    </div>
+                                    <div class="commentDate">Jun 22, 2022</div>
+                                </div>
+                                <div class="commentContent">
+                                    This project is great. Request sent!
+                                </div>
+                                <div class="commentActions">
+                                    <div>reply&nbsp</div>
+                                    <div>like</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="postContainer">
+                    <div class="relevanceInfo">
+                        <div class="tagLabel">indie</div>
+                        <div class="following">following</div>
+                        <div class="likeContainer">
+                            <div>13!</div>
+                        </div>
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                        "
+                    >
+                        <div class="postTitle">Near&nbsp</div>
+                    </div>
+                    <div class="postImgDes">
+                        <img
+                            src="./images/bubble.jpeg"
+                            alt="image for project"
+                            width="100px"
+                            height="100px"
+                        />
+                        <div class="postDes">
+                            <div class="postInfo">
+                                <div><strong>sandyalexg</strong>&nbsp</div>
+                                <div class="date">Jun 22, 2022</div>
+                            </div>
+                            <div class="desInfo">
+                                I have worked on this project for 5 years.
+                                Someone help me with the ending. I have worked
+                                on this project for 5 years. Someone help me
+                                with the ending. I have worked on this project
+                                for 5 years. Someone help me with the ending. I
+                                have worked on this project for 5 years. Someone
+                                help me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending. I have
+                                worked on this project for 5 years. Someone help
+                                me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending. I have
+                                worked on this project for 5 years. Someone help
+                                me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="line" />
+                    <div class="interactiveBtns">
+                        <div class="comment">
+                            <div
+                                class="commentBtn"
+                                onclick="showHideComments(event)"
+                            >
+                                12 comments
+                            </div>
+                        </div>
+                        <div class="getLinkBtn" onclick="getLinkEvent()">
+                            get project link!
+                        </div>
+                        <div class="repostBtn" onclick="repostEvent()">
+                            repost
+                        </div>
+                        <div class="likeBtn" onclick="likeEvent()">like</div>
+                    </div>
+                    <div class="commentOverview" style="display: none">
+                        <div id="makeCommentContainer">
+                            <form
+                                style="
+                                    display: flex;
+                                    align-items: center;
+                                    width: 100%;
+                                    flex-direction: column;
+                                "
+                            >
+                                <textarea
+                                    placeholder="say something..."
+                                    class="commentText"
+                                ></textarea>
+                            </form>
+                        </div>
+                        <div class="commentSection">
+                            <div class="userComment">
+                                <div class="commentUserDate">
+                                    <div class="commentUsername">
+                                        <strong>katking123</strong>&nbsp
+                                    </div>
+                                    <div class="commentDate">Jun 22, 2022</div>
+                                </div>
+                                <div class="commentContent">
+                                    This project is great. Request sent!
+                                </div>
+                                <div class="commentActions">
+                                    <div>reply&nbsp</div>
+                                    <div>like</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="postContainer">
+                    <div class="relevanceInfo">
+                        <div class="popularLabel">popular</div>
+                        <div class="tagLabel">soul</div>
+                        <div class="following">following</div>
+                        <div class="likeContainer">
+                            <div>15!</div>
+                        </div>
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                        "
+                    >
+                        <div class="postTitle">For Your Love&nbsp</div>
+                    </div>
+                    <div class="postImgDes">
+                        <img
+                            src="./images/bubble.jpeg"
+                            alt="image for project"
+                            width="100px"
+                            height="100px"
+                        />
+                        <div class="postDes">
+                            <div class="postInfo">
+                                <div><strong>steviewonder39</strong>&nbsp</div>
+                                <div class="date">Jun 22, 2022</div>
+                            </div>
+                            <div class="desInfo">
+                                I have worked on this project for 5 years.
+                                Someone help me with the ending. I have worked
+                                on this project for 5 years. Someone help me
+                                with the ending. I have worked on this project
+                                for 5 years. Someone help me with the ending. I
+                                have worked on this project for 5 years. Someone
+                                help me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending. I have
+                                worked on this project for 5 years. Someone help
+                                me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending. I have
+                                worked on this project for 5 years. Someone help
+                                me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="line" />
+                    <div class="interactiveBtns">
+                        <div class="comment">
+                            <div
+                                class="commentBtn"
+                                onclick="showHideComments(event)"
+                            >
+                                12 comments
+                            </div>
+                        </div>
+                        <div class="getLinkBtn" onclick="getLinkEvent()">
+                            get project link!
+                        </div>
+                        <div class="repostBtn" onclick="repostEvent()">
+                            repost
+                        </div>
+                        <div class="likeBtn" onclick="likeEvent()">like</div>
+                    </div>
+                    <div class="commentOverview" style="display: none">
+                        <div id="makeCommentContainer">
+                            <form
+                                style="
+                                    display: flex;
+                                    align-items: center;
+                                    width: 100%;
+                                    flex-direction: column;
+                                "
+                            >
+                                <textarea
+                                    placeholder="say something..."
+                                    class="commentText"
+                                ></textarea>
+                            </form>
+                        </div>
+                        <div class="commentSection">
+                            <div class="userComment">
+                                <div class="commentUserDate">
+                                    <div class="commentUsername">
+                                        <strong>katking123</strong>&nbsp
+                                    </div>
+                                    <div class="commentDate">Jun 22, 2022</div>
+                                </div>
+                                <div class="commentContent">
+                                    This project is great. Request sent!
+                                </div>
+                                <div class="commentActions">
+                                    <div>reply&nbsp</div>
+                                    <div>like</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="postContainer">
+                    <div class="relevanceInfo">
+                        <div class="popularLabel">popular</div>
+                        <div class="tagLabel">electronic, jazz, rock</div>
+                        <div class="following">following</div>
+                        <div class="likeContainer">
+                            <div>13!</div>
+                        </div>
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                        "
+                    >
+                        <div class="postTitle">Summer Soft&nbsp</div>
+                    </div>
+                    <div class="postImgDes">
+                        <img
+                            src="./images/bubble.jpeg"
+                            alt="image for project"
+                            width="100px"
+                            height="100px"
+                        />
+                        <div class="postDes">
+                            <div class="postInfo">
+                                <div><strong>minsung</strong>&nbsp</div>
+                                <div class="date">Jun 22, 2022</div>
+                            </div>
+                            <div class="desInfo">
+                                I have worked on this project for 5 years.
+                                Someone help me with the ending. I have worked
+                                on this project for 5 years. Someone help me
+                                with the ending. I have worked on this project
+                                for 5 years. Someone help me with the ending. I
+                                have worked on this project for 5 years. Someone
+                                help me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending. I have
+                                worked on this project for 5 years. Someone help
+                                me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending. I have
+                                worked on this project for 5 years. Someone help
+                                me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="line" />
+                    <div class="interactiveBtns">
+                        <div class="comment">
+                            <div
+                                class="commentBtn"
+                                onclick="showHideComments(event)"
+                            >
+                                12 comments
+                            </div>
+                        </div>
+                        <div class="getLinkBtn" onclick="getLinkEvent()">
+                            get project link!
+                        </div>
+                        <div class="repostBtn" onclick="repostEvent()">
+                            repost
+                        </div>
+                        <div class="likeBtn" onclick="likeEvent()">like</div>
+                    </div>
+                    <div class="commentOverview" style="display: none">
+                        <div id="makeCommentContainer">
+                            <form
+                                style="
+                                    display: flex;
+                                    align-items: center;
+                                    width: 100%;
+                                    flex-direction: column;
+                                "
+                            >
+                                <textarea
+                                    placeholder="say something..."
+                                    class="commentText"
+                                ></textarea>
+                            </form>
+                        </div>
+                        <div class="commentSection">
+                            <div class="userComment">
+                                <div class="commentUserDate">
+                                    <div class="commentUsername">
+                                        <strong>katking123</strong>&nbsp
+                                    </div>
+                                    <div class="commentDate">Jun 22, 2022</div>
+                                </div>
+                                <div class="commentContent">
+                                    This project is great. Request sent!
+                                </div>
+                                <div class="commentActions">
+                                    <div>reply&nbsp</div>
+                                    <div>like</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="postContainer">
+                    <div class="relevanceInfo">
+                        <div class="popularLabel">popular</div>
+                        <div class="tagLabel">electronic, jazz, rock</div>
+                        <div class="following">following</div>
+                        <div class="likeContainer">
+                            <div>13!</div>
+                        </div>
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                        "
+                    >
+                        <div class="postTitle">Summer Soft&nbsp</div>
+                    </div>
+                    <div class="postImgDes">
+                        <img
+                            src="./images/bubble.jpeg"
+                            alt="image for project"
+                            width="100px"
+                            height="100px"
+                        />
+                        <div class="postDes">
+                            <div class="postInfo">
+                                <div><strong>minsung</strong>&nbsp</div>
+                                <div class="date">Jun 22, 2022</div>
+                            </div>
+                            <div class="desInfo">
+                                I have worked on this project for 5 years.
+                                Someone help me with the ending. I have worked
+                                on this project for 5 years. Someone help me
+                                with the ending. I have worked on this project
+                                for 5 years. Someone help me with the ending. I
+                                have worked on this project for 5 years. Someone
+                                help me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending. I have
+                                worked on this project for 5 years. Someone help
+                                me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending. I have
+                                worked on this project for 5 years. Someone help
+                                me with the ending. I have worked on this
+                                project for 5 years. Someone help me with the
+                                ending. I have worked on this project for 5
+                                years. Someone help me with the ending.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="line" />
+                    <div class="interactiveBtns">
+                        <div class="comment">
+                            <div
+                                class="commentBtn"
+                                onclick="showHideComments(event)"
+                            >
+                                12 comments
+                            </div>
+                        </div>
+                        <div class="getLinkBtn" onclick="getLinkEvent()">
+                            get project link!
+                        </div>
+                        <div class="repostBtn" onclick="repostEvent()">
+                            repost
+                        </div>
+                        <div class="likeBtn" onclick="likeEvent()">like</div>
+                    </div>
+                    <div class="commentOverview" style="display: none">
+                        <div id="makeCommentContainer">
+                            <form
+                                style="
+                                    display: flex;
+                                    align-items: center;
+                                    width: 100%;
+                                    flex-direction: column;
+                                "
+                            >
+                                <textarea
+                                    placeholder="say something..."
+                                    class="commentText"
+                                ></textarea>
+                            </form>
+                        </div>
+                        <div class="commentSection">
+                            <div class="userComment">
+                                <div class="commentUserDate">
+                                    <div class="commentUsername">
+                                        <strong>katking123</strong>&nbsp
+                                    </div>
+                                    <div class="commentDate">Jun 22, 2022</div>
+                                </div>
+                                <div class="commentContent">
+                                    This project is great. Request sent!
+                                </div>
+                                <div class="commentActions">
+                                    <div>reply&nbsp</div>
+                                    <div>like</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="notificationInfo">
+                <div id="selectNotificationType">
+                    <div>notifications&nbsp</div>
+                    <select>
+                        <option>all</option>
+                        <option>comments</option>
+                        <option>requests</option>
+                        <option>new fans</option>
+                    </select>
+                </div>
+                <div id="notificationContainer">
+                    <div class="commentNotification">
+                        <div class="date">Jun 22, 2022</div>
+                        <strong>bo2323</strong> replied to your comment:
+                        <br />&nbsp&nbsp"this project can be better if..."
+                    </div>
+                    <div class="commentNotification">
+                        <div class="date">Jun 22, 2022</div>
+                        <strong>bo2323</strong> replied to your comment:
+                        <br />&nbsp&nbsp"this project can be better if..."
+                    </div>
+                    <div class="commentNotification">
+                        <div class="date">Jun 22, 2022</div>
+                        <strong>bo2323</strong> replied to your comment:
+                        <br />&nbsp&nbsp"this project can be better if..."
+                    </div>
+                    <div class="commentNotification">
+                        <div class="date">Jun 22, 2022</div>
+                        <strong>bo2323</strong> replied to your comment:
+                        <br />&nbsp&nbsp"this project can be better if..."
+                    </div>
+                    <div class="commentNotification">
+                        <div class="date">Jun 22, 2022</div>
+                        <strong>bo2323</strong> replied to your comment:
+                        <br />&nbsp&nbsp"this project can be better if..."
+                    </div>
+                    <div class="commentNotification">
+                        <div class="date">Jun 22, 2022</div>
+                        <strong>bo2323</strong> replied to your comment:
+                        <br />&nbsp&nbsp"this project can be better if..."
+                    </div>
+                    <div class="commentNotification">
+                        <div class="date">Jun 22, 2022</div>
+                        <strong>bo2323</strong> replied to your comment:
+                        <br />&nbsp&nbsp"this project can be better if..."
+                    </div>
+                    <div class="commentNotification">
+                        <div class="date">Jun 22, 2022</div>
+                        <strong>bo2323</strong> replied to your comment:
+                        <br />&nbsp&nbsp"this project can be better if..."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

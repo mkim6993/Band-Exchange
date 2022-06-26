@@ -1,0 +1,420 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgb(238, 238, 238);
+}
+
+a {
+  color: #00B7FF;
+}
+
+#feedNavigate {
+  cursor: pointer;
+  user-select: none;
+}
+
+.postTitle {
+  font-size: 30px;
+  margin: 5px;
+}
+
+.postContainer {
+  background-color: rgb(247, 247, 247);
+  padding: 5px;
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 3px;
+  margin-bottom: 30px;
+}
+
+.postInfo {
+  display: flex;
+  flex-direction: row;
+  font-size: 10px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+.date {
+  color: gray;
+}
+
+.desInfo {
+  background-color: rgb(234, 234, 234);
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  width: 100%;
+  height: 85%;
+  bottom: 0px;
+  overflow: auto;
+}
+
+.postDes {
+  position: relative;
+  margin-left: 5px;
+  width: 100%;
+}
+
+.relevanceInfo {
+  display: flex;
+  flex-direction: row;
+  font-size: 10px;
+  align-content: center;
+}
+
+.likeContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex: 1;
+  font-size: 12px;
+}
+
+
+.popularLabel {
+  background-color: rgb(230, 211, 248);
+  padding-left: 10px;
+  padding-right: 10px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.tagLabel {
+  background-color: rgb(219, 248, 211);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.following {
+  background-color: rgb(248, 233, 211);
+  padding-left: 10px;
+  padding-right: 10px;
+  user-select: none;
+  cursor: pointer;
+}
+
+#homeFeedContainer {
+  width: 700px;
+  margin-top: 20px;
+}
+
+.postImgDes {
+  display: flex;
+  flex-direction: row;
+}
+
+.interactiveBtns {
+  display: flex;
+  flex-direction: row;
+  /* margin-top: 5px; */
+  font-size: 12px;
+  justify-content: flex-end;
+}
+
+.likeBtn {
+  margin-right: 5px;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.likeBtn:hover {
+  background-color: rgb(211, 248, 243);
+  cursor: pointer;
+  user-select: none;
+}
+
+.repostBtn {
+  margin-right: 5px;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.repostBtn:hover {
+  background-color: rgb(211, 227, 248);
+  cursor: pointer;
+  user-select: none;
+}
+
+.getLinkBtn {
+  margin-right: 5px;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.getLinkBtn:hover {
+  background-color: rgb(248, 211, 211);
+  cursor: pointer;
+  user-select: none;
+}
+
+.comment {
+  flex: 1;
+  align-items: center;
+  flex-direction: row;
+  display: flex;
+}
+
+.commentBtn {
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.commentBtn:hover {
+  background-color: rgb(248, 211, 231);
+  cursor: pointer;
+  user-select: none;
+}
+
+.line {
+  padding: 0px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+#makeCommentContainer {
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  height: 60px;
+}
+
+.commentText {
+  resize: none;
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid rgb(183, 220, 123);
+  width: 100%;
+  height: 70px;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 5px;
+  outline: none;
+}
+
+.commentSection {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.commentContent {
+  margin-left: 15px;
+  font-size: 12px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.userComment {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  background-color: rgb(233, 233, 233);
+  border-radius: 5px;
+  padding: 10px;
+  width: auto;
+}
+
+.commentUsername {
+  color: gray;
+}
+
+.commentOverview {
+}
+
+.commentUserDate {
+  display: flex;
+  flex-direction: row;
+  font-size: 10px;
+}
+
+.commentActions {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  color: gray;
+}
+
+#newPostWindow {
+  width: 800px;
+  background-color: rgb(247, 247, 247);
+  border: 1px solid rgb(225, 225, 225);
+  border-radius: 5px;
+}
+
+#newPostContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.info {
+  margin: 15px;
+  height: 50px;
+}
+
+#profileFeedContainer {
+  width: 700px;
+  margin-top: 20px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+#profile {
+  display: flex;
+  justify-content: space-around;
+}
+
+#posts {
+  display: flex;
+  justify-content: center;
+}
+
+#followingsContainer {
+  width: 200px;
+  height: 50px;
+  background-color: rgb(233, 233, 233);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+#following {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#followers {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#titleAndFollow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  height: 50px;
+  background-color: rgb(247, 247, 247);
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 3px;
+}
+
+#profileTitleAndFollow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+  height: 50px;
+  background-color: rgb(247, 247, 247);
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 3px;
+}
+
+#profileTitle {
+  margin-left: 10px;
+  color: purple;
+}
+
+#profileInfo {
+  background-color: rgb(247, 247, 247);
+  margin-top: 20px;
+  height: 300px;
+  width: 500px;
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.navBarFixed {
+  position: fixed;
+  z-index: 1;
+  top: 0px;
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 3px;
+  width: 94.7%;
+}
+
+#notificationInfo {
+  background-color: rgb(247, 247, 247);
+  margin-top: 20px;
+  height: 400px;
+  width: 500px;
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 3px;
+  padding: 5px;
+}
+
+#selectNotificationType {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#notificationContainer {
+  margin-top: 5px;
+  height: 350px;
+  overflow: auto;
+  background-color: rgb(215, 215, 215);
+  border: 1px solid rgb(118, 118, 118);
+}
+
+/* #notificationContainer::-webkit-scrollbar {
+  display: none;
+} */
+
+.commentNotification {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 5px;
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 5px;
+  padding: 5px;
+  background-color: rgb(247, 247, 247);
+}
+
+#userProfile {
+  font-size: 20px;
+}
+
+#profilePic {
+  border-radius: 40px;
+  margin-right: 15px;
+}
+
+#profilePicName {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#profileDescription {
+  background-color: rgb(234, 234, 234);
+  margin-top: 5px;
+  overflow: auto;
+  height: 195px;
+  padding: 5px;
+}
+
+.postEdit {
+  border-radius: 5px;
+}
+
+.postEdit:hover {
+  background-color: rgb(211, 244, 248);
+  cursor: pointer;
+  user-select: none;
+}
