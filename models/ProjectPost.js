@@ -19,8 +19,8 @@ var projectPostSchema = Schema({
         following: Boolean,
         tags: [String],
     },
-    whoLiked: [String], // ids of people who liked the post
-    whoReposted: [String], // ids of people who reposted
+    whoLiked: [String], // username of people who liked the post
+    whoReposted: [String], // username of people who reposted
 });
 
 module.exports = mongoose.model("ProjectPost", projectPostSchema);

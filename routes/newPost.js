@@ -51,7 +51,7 @@ router.post("/", isLoggedIn, async (req, res, next) => {
         await Promise.all([
             post.save(),
             UserInfo.updateOne(
-                { user: username },
+                { username: username },
                 {
                     $inc: { numPosts: 1 },
                 }

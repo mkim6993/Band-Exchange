@@ -5,13 +5,22 @@
         <link rel="stylesheet" href="./stylesheets/style.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
+            // handles like click operations
             const likeEvent = (title) => {
                 const url = "http://localhost:3000/profile/like";
                 if (
-                    document.getElementById(title).style.backgroundColor === ""
+                    document.getElementById(title + "like").style
+                        .backgroundColor === ""
                 ) {
-                    document.getElementById(title).style.backgroundColor =
-                        "rgb(211, 248, 243)";
+                    document.getElementById(
+                        title + "like"
+                    ).style.backgroundColor = "rgb(211, 248, 243)";
+                    var currLike = document.getElementById(
+                        title + "likeCount"
+                    ).innerText;
+                    document.getElementById(title + "likeCount").innerText =
+                        parseInt(currLike) + 1;
+
                     const data = {
                         postId: title,
                         option: "l",
@@ -25,8 +34,15 @@
                         },
                     });
                 } else {
-                    console.log("unliked");
-                    document.getElementById(title).style.backgroundColor = "";
+                    document.getElementById(
+                        title + "like"
+                    ).style.backgroundColor = "";
+                    var currLike = document.getElementById(
+                        title + "likeCount"
+                    ).innerText;
+                    document.getElementById(title + "likeCount").innerText =
+                        parseInt(currLike) - 1;
+
                     const data = {
                         postId: title,
                         option: "d",
@@ -41,9 +57,96 @@
                     });
                 }
             };
+
+            // handles repost click operations
+            const repostEvent = (title) => {
+                const url = "http://localhost:3000/profile/repost";
+                if (
+                    document.getElementById(title + "repost").style
+                        .backgroundColor === ""
+                ) {
+                    document.getElementById(
+                        title + "repost"
+                    ).style.backgroundColor = "rgb(211, 227, 248)";
+                    var currRepost = document.getElementById(
+                        title + "repostCount"
+                    ).innerText;
+                    document.getElementById(title + "repostCount").innerText =
+                        parseInt(currRepost) + 1;
+
+                    const data = {
+                        postId: title,
+                        option: "r",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                } else {
+                    document.getElementById(
+                        title + "repost"
+                    ).style.backgroundColor = "";
+                    var currRepost = document.getElementById(
+                        title + "repostCount"
+                    ).innerText;
+                    document.getElementById(title + "repostCount").innerText =
+                        parseInt(currRepost) - 1;
+
+                    const data = {
+                        postId: title,
+                        option: "u",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                }
+            };
         </script>
     </head>
     <body>
+        <div id="postEditorShade">
+            <div id="postEditorContainer">
+                <div>x</div>
+                <form id="editorForm">
+                    <textarea id="editTitle" class="editText">
+project title</textarea
+                    >
+                    <div id="smallerInputContainer">
+                        image:
+                        <textarea id="editImage" class="editText">
+image</textarea
+                        >
+                        description:
+                        <textarea id="editDes" class="editText">
+description</textarea
+                        >
+                        link:
+                        <textarea id="editLink" class="editText">
+project link</textarea
+                        >
+                        collaborators:
+                        <textarea id="editCollab" class="editText">
+add collaborators</textarea
+                        >
+                        privacy:
+                        <select id="editPrivacy" class="editText">
+                            <option>public</option>
+                            <option>private</option>
+                        </select>
+                        <input type="submit" value="save" id="editSave" />
+                    </div>
+                </form>
+            </div>
+        </div>
         <div id="profileTitleAndFollow" class="bg-light">
             <div id="profileTitle"><h4><%= username %></h4></div>
             <img
@@ -106,11 +209,13 @@
                         <div class="privacy"><%= posts[post].privacy %></div>
                         <div class="likeContainer">
                             <div class="postEdit">go to project</div>
-                            <div id="<%= posts[post]._id %>likeCount">
-                                &nbsp <%= posts[post].likeCount %> |&nbsp
-                            </div>
+                            &nbsp&nbsp
                             <div id="<%= posts[post]._id %>repostCount">
                                 <%= posts[post].repostCount %>
+                            </div>
+                            &nbsp|&nbsp
+                            <div id="<%= posts[post]._id %>likeCount">
+                                <%= posts[post].likeCount %>
                             </div>
                         </div>
                     </div>
@@ -155,16 +260,42 @@
                         <div class="getLinkBtn" onclick="getLinkEvent()">
                             get project link!
                         </div>
-                        <div class="repostBtn" onclick="repostEvent()">
+                        <% if (posts[post].whoReposted.includes(username)) { %>
+                        <div
+                            class="repostBtn"
+                            onclick="repostEvent('<%= posts[post]._id %>')"
+                            id="<%= posts[post]._id %>repost"
+                            style="background-color: rgb(211, 227, 248)"
+                        >
                             repost
                         </div>
+                        <% } else { %>
+                        <div
+                            class="repostBtn"
+                            onclick="repostEvent('<%= posts[post]._id %>')"
+                            id="<%= posts[post]._id %>repost"
+                        >
+                            repost
+                        </div>
+                        <% } %> <% if (posts[post].whoLiked.includes(username))
+                        { %>
                         <div
                             class="likeBtn"
+                            style="background-color: rgb(211, 248, 243)"
                             onclick="likeEvent('<%= posts[post]._id %>')"
-                            id="<%= posts[post]._id %>"
+                            id="<%= posts[post]._id %>like"
                         >
                             like
                         </div>
+                        <% } else { %>
+                        <div
+                            class="likeBtn"
+                            onclick="likeEvent('<%= posts[post]._id %>')"
+                            id="<%= posts[post]._id %>like"
+                        >
+                            like
+                        </div>
+                        <% } %>
                     </div>
                     <div class="commentOverview" style="display: none">
                         <div id="makeCommentContainer">

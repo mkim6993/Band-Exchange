@@ -10,8 +10,8 @@ var userInfoSchema = Schema({
     following: [String],
     numPosts: Number,
     description: String,
-    likedPosts: [String],
-    repostedPosts: [String],
+    likedPosts: [String], // ids of posts
+    repostedPosts: [String], //ids of posts
 });
 
 module.exports = mongoose.model("UserInfo", userInfoSchema);
