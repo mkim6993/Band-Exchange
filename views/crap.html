@@ -1,0 +1,89 @@
+<% for (post in posts) {%>
+<div class="postContainer">
+    <div class="relevanceInfo">
+        <div class="popularLabel">
+            <% if (post.relevance.popular==true){ %> popular <% } else {%>
+        </div>
+        <div class="tagLabel">
+            <% for (tag in post.relevance.tags) {%>
+            <div><%= tag %></div>
+            <%} %>
+        </div>
+        <div class="following">
+            <% if (post.owner == username) { %>
+            <div>yours</div>
+            <% } else { %>
+            <div>following</div>
+            <% } %>
+        </div>
+        <div class="likeContainer">
+            <div class="postEdit">go to project</div>
+            <div id="likeCount">&nbsp<%= post.likeCount %> |&nbsp</div>
+            <div id="repostCount"><%= post.repostCount %></div>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row; align-items: center">
+        <div class="postTitle"><%= post.title %>&nbsp</div>
+    </div>
+    <div class="postImgDes">
+        <img
+            src="./images/bubble.jpeg"
+            alt="image for project"
+            width="100px"
+            height="100px"
+        />
+        <div class="postDes">
+            <div class="postInfo">
+                <div><strong><%= username %></strong>&nbsp</div>
+                <div class="date"><%= post.date %></div>
+            </div>
+            <div class="desInfo"><%= description %></div>
+        </div>
+    </div>
+    <hr class="line" />
+    <div class="interactiveBtns">
+        <div class="comment">
+            <div class="commentBtn" onclick="showHideComments(event)">
+                <%= commentCount %> comments
+            </div>
+        </div>
+        <div class="getLinkBtn" onclick="getLinkEvent()">get project link!</div>
+        <div class="repostBtn" onclick="repostEvent()">repost</div>
+        <div class="likeBtn" onclick="likeEvent()">like</div>
+    </div>
+    <div class="commentOverview" style="display: none">
+        <div id="makeCommentContainer">
+            <form
+                style="
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    flex-direction: column;
+                "
+            >
+                <textarea
+                    placeholder="say something..."
+                    class="commentText"
+                ></textarea>
+            </form>
+        </div>
+        <div class="commentSection">
+            <div class="userComment">
+                <div class="commentUserDate">
+                    <div class="commentUsername">
+                        <strong>katking123</strong>&nbsp
+                    </div>
+                    <div class="commentDate">Jun 22, 2022</div>
+                </div>
+                <div class="commentContent">
+                    This project is great. Request sent!
+                </div>
+                <div class="commentActions">
+                    <div>reply&nbsp</div>
+                    <div>like</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>

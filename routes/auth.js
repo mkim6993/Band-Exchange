@@ -19,6 +19,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const User = require("../models/User");
+const UserInfo = require("../models/UserInfo");
 
 // This is an example of middleware
 // where we look at a request and process it!
@@ -86,10 +87,20 @@ router.post("/signup", async (req, res, next) => {
                     username: username,
                     passphrase: encrypted,
                     age: age,
-                    numPosts: 0,
                 });
 
-                await user.save();
+                const userInfo = new UserInfo({
+                    username: username,
+                    numFollowers: 0,
+                    numFollowing: 0,
+                    followers: [],
+                    following: [],
+                    numPosts: 0,
+                    description: "",
+                    likedPosts: [],
+                    repostedPosts: [],
+                });
+                await Promise.all([user.save(), userInfo.save()]);
                 req.session.username = user.username;
                 req.session.user = user;
                 res.redirect("/");

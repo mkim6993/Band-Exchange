@@ -3,7 +3,45 @@
     <head>
         <title><%= title %></title>
         <link rel="stylesheet" href="./stylesheets/style.css" />
-        <script></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            const likeEvent = (title) => {
+                const url = "http://localhost:3000/profile/like";
+                if (
+                    document.getElementById(title).style.backgroundColor === ""
+                ) {
+                    document.getElementById(title).style.backgroundColor =
+                        "rgb(211, 248, 243)";
+                    const data = {
+                        postId: title,
+                        option: "l",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                } else {
+                    console.log("unliked");
+                    document.getElementById(title).style.backgroundColor = "";
+                    const data = {
+                        postId: title,
+                        option: "d",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                }
+            };
+        </script>
     </head>
     <body>
         <div id="profileTitleAndFollow" class="bg-light">
@@ -15,23 +53,29 @@
                 height="50px"
             />
             <div>
-                your projects:
-                <select>
-                    <option>public</option>
-                    <option>private</option>
-                    <option>liked</option>
-                    <option>reposted</option>
-                </select>
+                <form action="/profile" method="post">
+                    your projects:
+                    <select name="postType" onchange="this.form.submit()">
+                        <option value="" selected disabled hidden>
+                            <%= whichType %>
+                        </option>
+                        <option value="public">public</option>
+                        <option value="private">private</option>
+                        <option value="liked">liked</option>
+                        <option value="reposted">reposted</option>
+                    </select>
+                </form>
             </div>
-            <div>you have made 12 posts</div>
+            <div><%= count %> <%= whichType %> posts</div>
+            <div id="settingsBtn">settings</div>
             <div id="followingsContainer">
                 <div id="following">
                     <div>following</div>
-                    <div>12</div>
+                    <div><%= userDetails.numFollowing %></div>
                 </div>
                 <div id="followers">
                     <div>fans</div>
-                    <div>12</div>
+                    <div><%= userDetails.numFollowers %></div>
                 </div>
             </div>
         </div>
@@ -46,19 +90,10 @@
                         id="profilePic"
                     />
                     <div id="userProfile"><%= username %></div>
+                    <div id="totalPosts"><%= userDetails.numPosts %> posts</div>
                 </div>
                 <div id="profileDescription">
-                    This is my profile. look at my profile. (:<>) Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s, when an unknown printer took a galley of
-                    type and scrambled it to make a type specimen book. It has
-                    survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged. It
-                    was popularised in the 1960s with the release of Letraset
-                    sheets containing Lorem Ipsum passages, and more recently
-                    with desktop publishing software like Aldus PageMaker
-                    including versions of Lorem Ipsum.
+                    <%= userDetails.description %>
                 </div>
             </div>
             <div id="profileFeedContainer">
@@ -68,12 +103,13 @@
                         <div class="popularLabel">popular</div>
                         <div class="tagLabel">electronic</div>
                         <div class="following">following</div>
+                        <div class="privacy"><%= posts[post].privacy %></div>
                         <div class="likeContainer">
                             <div class="postEdit">go to project</div>
-                            <div id="likeCount">
+                            <div id="<%= posts[post]._id %>likeCount">
                                 &nbsp <%= posts[post].likeCount %> |&nbsp
                             </div>
-                            <div id="repostCount">
+                            <div id="<%= posts[post]._id %>repostCount">
                                 <%= posts[post].repostCount %>
                             </div>
                         </div>
@@ -122,7 +158,13 @@
                         <div class="repostBtn" onclick="repostEvent()">
                             repost
                         </div>
-                        <div class="likeBtn" onclick="likeEvent()">like</div>
+                        <div
+                            class="likeBtn"
+                            onclick="likeEvent('<%= posts[post]._id %>')"
+                            id="<%= posts[post]._id %>"
+                        >
+                            like
+                        </div>
                     </div>
                     <div class="commentOverview" style="display: none">
                         <div id="makeCommentContainer">

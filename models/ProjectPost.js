@@ -6,11 +6,11 @@ var projectPostSchema = Schema({
     owner: String,
     title: String,
     description: String,
-    url: String,
+    url: String, // url to project
     otherCollaborators: String,
     privacy: String,
-    date: Date,
-    date_time: Date,
+    date: String, // formatted date
+    date_time: Date, // technical date for organizing
     likeCount: Number,
     repostCount: Number,
     commentCount: Number,
@@ -19,6 +19,8 @@ var projectPostSchema = Schema({
         following: Boolean,
         tags: [String],
     },
+    whoLiked: [String], // ids of people who liked the post
+    whoReposted: [String], // ids of people who reposted
 });
 
 module.exports = mongoose.model("ProjectPost", projectPostSchema);

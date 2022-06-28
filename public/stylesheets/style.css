@@ -94,6 +94,13 @@ a {
   cursor: pointer;
 }
 
+.privacy {
+  background-color: rgb(246, 211, 248);
+  padding-left: 10px;
+  padding-right: 10px;
+  user-select: none;
+}
+
 #homeFeedContainer {
   width: 700px;
   margin-top: 20px;
@@ -401,6 +408,10 @@ a {
   align-items: center;
 }
 
+#totalPosts {
+  margin-left: 10px;
+}
+
 #profileDescription {
   background-color: rgb(234, 234, 234);
   margin-top: 5px;
@@ -415,6 +426,17 @@ a {
 
 .postEdit:hover {
   background-color: rgb(211, 244, 248);
+  cursor: pointer;
+  user-select: none;
+}
+
+#settingsBtn {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#settingsBtn:hover {
+  background-color: rgb(233, 233, 233);
   cursor: pointer;
   user-select: none;
 }

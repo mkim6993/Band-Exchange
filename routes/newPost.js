@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const Post = require("../models/ProjectPost");
+const UserInfo = require("../models/UserInfo");
 
 const isLoggedIn = (req, res, next) => {
     if (res.locals.loggedIn) {
@@ -23,9 +24,9 @@ router.post("/", isLoggedIn, async (req, res, next) => {
         const username = req.session.username;
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, "0");
-        var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        var mm = String(today.toLocaleString("default", { month: "short" }));
         var yyyy = today.getFullYear();
-        today = mm + "/" + dd + "/" + yyyy;
+        today = mm + " " + dd + ", " + yyyy;
 
         var post = new Post({
             owner: username,
@@ -44,8 +45,18 @@ router.post("/", isLoggedIn, async (req, res, next) => {
                 following: false,
                 tags: ["jazz", "electronic"],
             },
+            whoLiked: [],
+            whoReposted: [],
         });
-        await post.save();
+        await Promise.all([
+            post.save(),
+            UserInfo.updateOne(
+                { user: username },
+                {
+                    $inc: { numPosts: 1 },
+                }
+            ),
+        ]);
         res.redirect("/profile");
     } catch (err) {
         next(err);
