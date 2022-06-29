@@ -110,12 +110,31 @@
                     });
                 }
             };
+
+            // hide post editor
+            const hideEditor = (e) => {
+                if (
+                    e.target.id === "postEditorShade" ||
+                    e.target.id === "exitBtn"
+                ) {
+                    document.getElementById("postEditorShade").style.display =
+                        "none";
+                }
+            };
+
+            // show post editor
+            const showEditor = () => {
+                document.getElementById("postEditorShade").style.display =
+                    "flex";
+            };
         </script>
     </head>
     <body>
-        <div id="postEditorShade">
+        <div id="postEditorShade" onclick="hideEditor(event)">
             <div id="postEditorContainer">
-                <div>x</div>
+                <div id="editorExit">
+                    <div id="exitBtn" onclick="hideEditor(event)">x</div>
+                </div>
                 <form id="editorForm">
                     <textarea id="editTitle" class="editText">
 project title</textarea
@@ -208,7 +227,9 @@ add collaborators</textarea
                         <div class="following">following</div>
                         <div class="privacy"><%= posts[post].privacy %></div>
                         <div class="likeContainer">
-                            <div class="postEdit">go to project</div>
+                            <div class="postEdit" onclick="showEditor()">
+                                go to project
+                            </div>
                             &nbsp&nbsp
                             <div id="<%= posts[post]._id %>repostCount">
                                 <%= posts[post].repostCount %>
