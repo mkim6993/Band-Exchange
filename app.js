@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -13,7 +14,6 @@ var app = express();
 // *********************************************************** //
 //  Connecting to the database
 // *********************************************************** //
-const mongoose = require("mongoose");
 const mongodb_URI = process.env.mongodb_URI;
 
 mongoose.connect(mongodb_URI, {
