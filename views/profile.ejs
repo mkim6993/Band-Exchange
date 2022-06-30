@@ -7,8 +7,7 @@
         <script>
             // handles like click operations
             const likeEvent = (title) => {
-                const url =
-                    "https://tranquil-island-87679.herokuapp.com/profile/like";
+                const url = "https://localhost:3000/profile/like";
                 if (
                     document.getElementById(title + "like").style
                         .backgroundColor === ""
@@ -61,8 +60,7 @@
 
             // handles repost click operations
             const repostEvent = (title) => {
-                const url =
-                    "https://tranquil-island-87679.herokuapp.com/profile/repost";
+                const url = "https://localhost:3000/profile/repost";
                 if (
                     document.getElementById(title + "repost").style
                         .backgroundColor === ""
