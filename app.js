@@ -14,8 +14,6 @@ var app = express();
 //  Connecting to the database
 // *********************************************************** //
 const mongoose = require("mongoose");
-// const mongodb_URI =
-//     "mongodb+srv://cs_sj:BrandeisSpr22@cluster0.kgugl.mongodb.net/minsungKim?retryWrites=true&w=majority";
 const mongodb_URI = process.env.mongodb_URI;
 
 mongoose.connect(mongodb_URI, {
