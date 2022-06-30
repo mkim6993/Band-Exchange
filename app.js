@@ -14,8 +14,9 @@ var app = express();
 //  Connecting to the database
 // *********************************************************** //
 const mongoose = require("mongoose");
-const mongodb_URI =
-    "mongodb+srv://cs_sj:BrandeisSpr22@cluster0.kgugl.mongodb.net/minsungKim?retryWrites=true&w=majority";
+// const mongodb_URI =
+//     "mongodb+srv://cs_sj:BrandeisSpr22@cluster0.kgugl.mongodb.net/minsungKim?retryWrites=true&w=majority";
+const mongodb_URI = process.env.mongodb_URI;
 
 mongoose.connect(mongodb_URI, {
     useNewUrlParser: true,
@@ -46,6 +47,7 @@ var usersRouter = require("./routes/users");
 var followingRouter = require("./routes/following");
 var newPostRouter = require("./routes/newPost");
 var profileRouter = require("./routes/profile");
+var settingsRouter = require("./routes/settings");
 
 // *********************************************************** //
 //  Express sessions
@@ -93,6 +95,7 @@ app.use("/users", usersRouter);
 app.use("/following", followingRouter);
 app.use("/newPost", newPostRouter);
 app.use("/profile", profileRouter);
+app.use("/settings", settingsRouter);
 
 // *********************************************************** //
 // Server error handling

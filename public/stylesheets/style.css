@@ -316,6 +316,7 @@ a {
   background-color: rgb(247, 247, 247);
   border: 1px solid rgb(143, 143, 143);
   border-radius: 3px;
+  padding-left: 10px;
 }
 
 #profileTitleAndFollow {
@@ -433,6 +434,7 @@ a {
 #settingsBtn {
   padding: 5px;
   border-radius: 5px;
+  text-decoration: none;
 }
 
 #settingsBtn:hover {

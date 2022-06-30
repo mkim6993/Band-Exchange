@@ -170,7 +170,17 @@ router.post("/repost", async (req, res, next) => {
                 { $pull: { repostedPosts: id } }
             );
         }
-    } catch (err) {}
+    } catch (err) {
+        next(err);
+    }
+});
+
+// delete post
+router.post("/delete", async (req, res, next) => {
+    try {
+    } catch (err) {
+        next(err);
+    }
 });
 
 module.exports = router;
