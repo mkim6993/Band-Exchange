@@ -122,6 +122,7 @@ router.post("/like", async (req, res, next) => {
             );
         } else {
             // if user unlikes the post
+            console.log("unliked: remove like");
             await Post.updateOne(
                 { _id: ObjectId(id) },
                 {
@@ -129,6 +130,7 @@ router.post("/like", async (req, res, next) => {
                     $pull: { whoLiked: req.session.username },
                 }
             );
+            console.log("unliked: remove from user liked");
             await UserInfo.updateOne(
                 { username: req.session.username },
                 { $pull: { likedPosts: id } }
