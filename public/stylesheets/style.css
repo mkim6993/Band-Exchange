@@ -165,6 +165,7 @@ a {
 .commentBtn {
   border-radius: 5px;
   padding: 3px;
+  user-select: none;
 }
 
 .commentBtn:hover {
@@ -245,6 +246,7 @@ a {
   background-color: rgb(247, 247, 247);
   border: 1px solid rgb(225, 225, 225);
   border-radius: 5px;
+  padding: 10px;
 }
 
 #newPostContainer {
@@ -535,4 +537,119 @@ a {
   display: flex;
   flex-direction: column;
   padding: 5px;
+}
+
+#settingDescription {
+  width: 80%;
+  height: 100px;
+  resize: none;
+  outline: none;
+  padding: 5px;
+}
+
+#notificationSettings {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.settingsChecklist {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+   
+}
+
+.notificationLabels {
+  margin-left: 5px;
+}
+
+#searchContainer {
+
+}
+
+#category {
+  display: flex;
+  flex-direction: row;
+}
+
+.filter {
+  padding: 15px;
+  font-weight: bold;
+  font-size: 15px;
+  margin-right: 5px;
+  margin-top: 5px;
+  border-radius: 25px;
+  margin-bottom: 5px;
+}
+
+.filter:hover {
+  background-color: rgb(247, 247, 247);
+  cursor: pointer;
+}
+
+#searchPosts {
+  margin-top: 10px;
+  flex: 4;
+}
+
+#searchContent {
+  display: flex;
+  flex-direction: row;
+}
+
+#recommendedTags {
+  margin-top: 10px;
+  margin-left: 20px;
+  background-color: rgb(247, 247, 247);
+  padding: 5px;
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 3px;
+  height: 400px;
+}
+
+#recCreators {
+  margin-top: 15px;
+  margin-left: 20px;
+  background-color: rgb(247, 247, 247);
+  padding: 5px;
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 3px;
+  height: 200px;
+}
+
+#recTagContainer {
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow: scroll;
+  height: 360px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#recCreatorContainer {
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow: scroll;
+  height: 160px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.recTags {
+}
+
+#rec {
+  display: flex;
+  flex-direction: column;
+  flex: 1.2;
+}
+
+#aboutInfo {
+  margin-top: 15px;
+  margin-left: 20px;
+  background-color: rgb(247, 247, 247);
+  padding: 15px;
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 3px;
+  height: 200px;
 }

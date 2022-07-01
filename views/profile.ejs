@@ -7,7 +7,7 @@
         <script>
             // handles like click operations
             const likeEvent = (title) => {
-                const url = "https://localhost:3000/profile/like";
+                const url = "http://localhost:3000/profile/like"; // change url when deployment
                 if (
                     document.getElementById(title + "like").style
                         .backgroundColor === ""
@@ -60,7 +60,7 @@
 
             // handles repost click operations
             const repostEvent = (title) => {
-                const url = "https://localhost:3000/profile/repost";
+                const url = "http://localhost:3000/profile/repost"; // change url when deploying
                 if (
                     document.getElementById(title + "repost").style
                         .backgroundColor === ""
@@ -136,6 +136,23 @@
                 form.style.display = "hidden";
                 document.body.appendChild(form);
                 form.submit();
+            };
+
+            // show and hide comments
+            const showHideComments = (e) => {
+                e.preventDefault();
+                var visible =
+                    document.getElementsByClassName("commentOverview")[0].style
+                        .display;
+                if (visible === "none") {
+                    document.getElementsByClassName(
+                        "commentOverview"
+                    )[0].style.display = "block";
+                } else {
+                    document.getElementsByClassName(
+                        "commentOverview"
+                    )[0].style.display = "none";
+                }
             };
         </script>
     </head>
@@ -359,7 +376,7 @@ add collaborators</textarea
                                     This project is great. Request sent!
                                 </div>
                                 <div class="commentActions">
-                                    <div>reply&nbsp</div>
+                                    <div>reply&nbsp&nbsp</div>
                                     <div>like</div>
                                 </div>
                             </div>

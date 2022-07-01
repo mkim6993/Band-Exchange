@@ -1,0 +1,47 @@
+<h1>Bird Sounds Around the Earth</h1>
+<h4><%= country %></h4>
+<h5>Number of species: <%= birds.numSpecies %></h5>
+<% var num = birds.numSpecies; var pages = Math.floor(num/30); %>
+<div class="mx-3">
+    <% for(var i = beginning; i < ending; i++){%>
+    <div>name: <%= birds.recordings[i].en %></div>
+    <div>locality: <%= birds.recordings[i].loc %></div>
+    <div>species: <%= birds.recordings[i].sp %></div>
+    <div>time of recording: <%= birds.recordings[i].time %></div>
+    <audio controls src="<%= birds.recordings[i].file %>">
+        Your browser does not support the audio element
+    </audio>
+    <hr />
+    <% } %>
+    <div style="display: flex; flex-direction: row">
+        < <% for(var i = 0; i < pages; i++) {%>
+        <div style="cursor: pointer" id="<%= i+1 %>" onclick="test(this.id)">
+            &nbsp<%= i+1 %>&nbsp
+        </div>
+        <% } %> >
+    </div>
+</div>
+<script type="text/javascript">
+    document.getElementById("1").style.color = "red";
+
+    const test = (id) => {
+        // change tab color
+        var pages = "<%= pages %>";
+        const tab = document.getElementById(id);
+        for (var x = 0; x < pages; x++) {
+            document.getElementById(x + 1).style.color = "black";
+        }
+        tab.style.color = "red";
+
+        console.log("postrequest");
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:3000/birds", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(
+            JSON.stringify({
+                country: "<%= country %>",
+                pageNum: id,
+            })
+        );
+    };
+</script>

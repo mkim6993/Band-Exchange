@@ -12,6 +12,14 @@ var userInfoSchema = Schema({
     description: String,
     likedPosts: [String], // ids of posts
     repostedPosts: [String], //ids of posts
+    profilePic: String,
+    notifications: {
+        collab: Boolean,
+        newFans: Boolean,
+        postComment: Boolean,
+        replies: Boolean,
+    },
+    blocked: [String],
 });
 
 module.exports = mongoose.model("UserInfo", userInfoSchema);

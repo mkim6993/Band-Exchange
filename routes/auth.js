@@ -99,6 +99,14 @@ router.post("/signup", async (req, res, next) => {
                     description: "",
                     likedPosts: [],
                     repostedPosts: [],
+                    profilePic: "",
+                    notifications: {
+                        collab: true,
+                        newFans: true,
+                        postComment: true,
+                        replies: true,
+                    },
+                    blocked: [],
                 });
                 await Promise.all([user.save(), userInfo.save()]);
                 req.session.username = user.username;

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="./stylesheets/style.css" />
+        <script></script>
+    </head>
+    <body>
+        <div id="titleAndFollow">
+            <h4><%= title %></h4>
+        </div>
+        <div id="searchContainer">
+            <div id="category">
+                <div class="filter">posts</div>
+                <div class="filter">tag</div>
+                <div class="filter">creators</div>
+            </div>
+            <div id="searchContainer">
+                <select name="sort">
+                    <option value="top">top</option>
+                    <option value="new">new</option>
+                    <option value="mostComments">most comments</option>
+                </select>
+                <select name="time">
+                    <option value="all">all time</option>
+                    <option value="year">this year</option>
+                    <option value="month">this month</option>
+                    <option value="week">this week</option>
+                    <option value="today">today</option>
+                    <option value="hour">this hour</option>
+                </select>
+            </div>
+            <div id="searchContent">
+                <!---->
+                <div id="searchPosts">
+                    <div class="postContainer">
+                        <div class="relevanceInfo">
+                            <div class="tagLabel">indie</div>
+                            <div class="following">following</div>
+                            <div class="likeContainer">
+                                <div>13!</div>
+                            </div>
+                        </div>
+                        <div
+                            style="
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                            "
+                        >
+                            <div class="postTitle">Near&nbsp</div>
+                        </div>
+                        <div class="postImgDes">
+                            <img
+                                src="./images/bubble.jpeg"
+                                alt="image for project"
+                                width="100px"
+                                height="100px"
+                            />
+                            <div class="postDes">
+                                <div class="postInfo">
+                                    <div><strong>sandyalexg</strong>&nbsp</div>
+                                    <div class="date">Jun 22, 2022</div>
+                                </div>
+                                <div class="desInfo">
+                                    I have worked on this project for 5 years.
+                                    Someone help me with the ending. I have
+                                    worked on this project for 5 years.
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="line" />
+                        <div class="interactiveBtns">
+                            <div class="comment">
+                                <div
+                                    class="commentBtn"
+                                    onclick="showHideComments(event)"
+                                >
+                                    12 comments
+                                </div>
+                            </div>
+                            <div class="getLinkBtn" onclick="getLinkEvent()">
+                                get project link!
+                            </div>
+                            <div class="repostBtn" onclick="repostEvent()">
+                                repost
+                            </div>
+                            <div class="likeBtn" onclick="likeEvent()">
+                                like
+                            </div>
+                        </div>
+                        <div class="commentOverview" style="display: none">
+                            <div id="makeCommentContainer">
+                                <form
+                                    style="
+                                        display: flex;
+                                        align-items: center;
+                                        width: 100%;
+                                        flex-direction: column;
+                                    "
+                                >
+                                    <textarea
+                                        placeholder="say something..."
+                                        class="commentText"
+                                    ></textarea>
+                                </form>
+                            </div>
+                            <div class="commentSection">
+                                <div class="userComment">
+                                    <div class="commentUserDate">
+                                        <div class="commentUsername">
+                                            <strong>katking123</strong>&nbsp
+                                        </div>
+                                        <div class="commentDate">
+                                            Jun 22, 2022
+                                        </div>
+                                    </div>
+                                    <div class="commentContent">
+                                        This project is great. Request sent!
+                                    </div>
+                                    <div class="commentActions">
+                                        <div>reply&nbsp</div>
+                                        <div>like</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="postContainer">
+                        <div class="relevanceInfo">
+                            <div class="tagLabel">indie</div>
+                            <div class="following">following</div>
+                            <div class="likeContainer">
+                                <div>13!</div>
+                            </div>
+                        </div>
+                        <div
+                            style="
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                            "
+                        >
+                            <div class="postTitle">Near&nbsp</div>
+                        </div>
+                        <div class="postImgDes">
+                            <img
+                                src="./images/bubble.jpeg"
+                                alt="image for project"
+                                width="100px"
+                                height="100px"
+                            />
+                            <div class="postDes">
+                                <div class="postInfo">
+                                    <div><strong>sandyalexg</strong>&nbsp</div>
+                                    <div class="date">Jun 22, 2022</div>
+                                </div>
+                                <div class="desInfo">
+                                    I have worked on this project for 5 years.
+                                    Someone help me with the ending. I have
+                                    worked on this project for 5 years.
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="line" />
+                        <div class="interactiveBtns">
+                            <div class="comment">
+                                <div
+                                    class="commentBtn"
+                                    onclick="showHideComments(event)"
+                                >
+                                    12 comments
+                                </div>
+                            </div>
+                            <div class="getLinkBtn" onclick="getLinkEvent()">
+                                get project link!
+                            </div>
+                            <div class="repostBtn" onclick="repostEvent()">
+                                repost
+                            </div>
+                            <div class="likeBtn" onclick="likeEvent()">
+                                like
+                            </div>
+                        </div>
+                        <div class="commentOverview" style="display: none">
+                            <div id="makeCommentContainer">
+                                <form
+                                    style="
+                                        display: flex;
+                                        align-items: center;
+                                        width: 100%;
+                                        flex-direction: column;
+                                    "
+                                >
+                                    <textarea
+                                        placeholder="say something..."
+                                        class="commentText"
+                                    ></textarea>
+                                </form>
+                            </div>
+                            <div class="commentSection">
+                                <div class="userComment">
+                                    <div class="commentUserDate">
+                                        <div class="commentUsername">
+                                            <strong>katking123</strong>&nbsp
+                                        </div>
+                                        <div class="commentDate">
+                                            Jun 22, 2022
+                                        </div>
+                                    </div>
+                                    <div class="commentContent">
+                                        This project is great. Request sent!
+                                    </div>
+                                    <div class="commentActions">
+                                        <div>reply&nbsp</div>
+                                        <div>like</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="rec">
+                    <div id="recommendedTags">
+                        <div style="font-size: 15px; margin-bottom: 10px">
+                            tags
+                        </div>
+                        <div id="recTagContainer">
+                            <div class="recTags">electronic</div>
+                            <hr />
+                            <div class="recTags">trap</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                        </div>
+                    </div>
+                    <div id="recCreators">
+                        <div style="font-size: 15px; margin-bottom: 10px">
+                            featured creators
+                        </div>
+                        <div id="recCreatorContainer">
+                            <div class="recTags">electronic</div>
+                            <hr />
+                            <div class="recTags">trap</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                            <div class="recTags">ambient</div>
+                            <hr />
+                        </div>
+                    </div>
+                    <div id="aboutInfo">
+                        <div>about bandExchange</div>
+                        <div>blog</div>
+                        <div>feedback</div>
+                        <div>privacy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

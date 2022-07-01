@@ -3,20 +3,95 @@
     <head>
         <title><%= title %></title>
         <link rel="stylesheet" href="./stylesheets/style.css" />
-        <script></script>
+        <script>
+            // show checkboxes checked or unchecked depending on userInfo
+            const checked = () => {
+                document.getElementById("showRequests").checked =
+                    "<%= userInfo.notifications.collab %>" === "true";
+                document.getElementById("showComments").checked =
+                    "<%= userInfo.notifications.newFans %>" === "true";
+                document.getElementById("showPostComments").checked =
+                    "<%= userInfo.notifications.postComment %>" === "true";
+                document.getElementById("showReplies").checked =
+                    "<%= userInfo.notifications.replies %>" === "true";
+            };
+        </script>
     </head>
-    <body>
+    <body onload="checked()">
         <div id="titleAndFollow">
             <h4><%= title %></h4>
         </div>
         <div id="newPostContainer">
             <div id="newPostWindow">
-                <div>profile picture</div>
-                <div>description</div>
-                <div>notification settings</div>
-                <div>change username</div>
-                <div>change password</div>
-                <div>blocked users</div>
+                <form method="post" action="/settings">
+                    <div>profile picture</div>
+                    <input type="text" />
+                    <div>description</div>
+                    <textarea
+                        id="settingDescription"
+                        placeholder="something about yourself..."
+                        name="settingDescription"
+                    >
+<%= userInfo.description %></textarea
+                    >
+                    <div>notification settings</div>
+                    <div id="notificationSettings">
+                        <div class="settingsChecklist">
+                            <input
+                                type="checkbox"
+                                id="showRequests"
+                                name="showRequests"
+                                value=""
+                            />
+                            <label for="showRequests" class="notificationLabels"
+                                >collaboration requests</label
+                            >
+                        </div>
+                        <div class="settingsChecklist">
+                            <input
+                                type="checkbox"
+                                id="showComments"
+                                name="showComments"
+                                value=""
+                            />
+                            <label for="showNewFans" class="notificationLabels"
+                                >new fans</label
+                            >
+                        </div>
+                        <div class="settingsChecklist">
+                            <input
+                                type="checkbox"
+                                id="showPostComments"
+                                name="showPostComments"
+                                value=""
+                            />
+                            <label for="showComments" class="notificationLabels"
+                                >comments on your post</label
+                            >
+                        </div>
+                        <div class="settingsChecklist">
+                            <input
+                                type="checkbox"
+                                id="showReplies"
+                                name="showReplies"
+                                value=""
+                            />
+                            <label for="showReplies" class="notificationLabels"
+                                >replies to your comments</label
+                            >
+                        </div>
+                    </div>
+                    <div>change username</div>
+                    <input type="text" />
+                    <div>new password</div>
+                    <input type="text" />
+                    <div>confirm new password</div>
+                    <input type="text" />
+                    <div>blocked users</div>
+                    <input type="text" />
+                    <br />
+                    <input type="submit" value="save and back" />
+                </form>
             </div>
         </div>
     </body>

@@ -46,6 +46,8 @@ var followingRouter = require("./routes/following");
 var newPostRouter = require("./routes/newPost");
 var profileRouter = require("./routes/profile");
 var settingsRouter = require("./routes/settings");
+var apiRouter = require("./routes/api");
+var searchRouter = require("./routes/search");
 
 // *********************************************************** //
 //  Express sessions
@@ -94,6 +96,8 @@ app.use("/following", followingRouter);
 app.use("/newPost", newPostRouter);
 app.use("/profile", profileRouter);
 app.use("/settings", settingsRouter);
+app.use("/api", apiRouter);
+app.use("/search", searchRouter);
 
 // *********************************************************** //
 // Server error handling

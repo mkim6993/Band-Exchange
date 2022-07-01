@@ -1,2 +1,2 @@
-export mongodb_URI="mongodb+srv://cs_sj:BrandeisSpr22@cluster0.kgugl.mongodb.net/minsungKim?retryWrites=true&w=majority"
+export mongodb_URI="mongodb+srv://kmaxsung:TigerBellyEats28!!12@bandexchangecluster.eardj.mongodb.net/test"
 nodemon
