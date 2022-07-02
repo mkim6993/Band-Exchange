@@ -653,3 +653,40 @@ a {
   border-radius: 3px;
   height: 200px;
 }
+
+#collabContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-left: 15px;
+}
+
+#find {
+  width: 190px;
+  background-color: rgb(220, 220, 220);
+}
+
+#foundUserContainer {
+  display: flex;
+  border: 1px solid gray;
+  flex-direction: column;
+}
+
+#foundUser {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid gray;
+}
+
+#addedCollab {
+  background-color: rgb(220, 220, 220);
+  color: gray;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+#collabSearch {
+  display: flex;
+  flex-direction: row;
+}
