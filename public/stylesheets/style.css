@@ -483,6 +483,8 @@ a {
 
 #exitBtn:hover {
   cursor: pointer;
+  background-color: rgb(233, 233, 233);
+  border-radius: 5px;
 }
 
 #editorForm {

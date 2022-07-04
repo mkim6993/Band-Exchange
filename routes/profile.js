@@ -180,6 +180,59 @@ router.post("/repost", async (req, res, next) => {
 // delete post
 router.post("/delete", async (req, res, next) => {
     try {
+        const id = req.body.id;
+        // remove all instance of postID in users' likedPosts and repostedPosts
+        await UserInfo.updateMany(
+            {},
+            { $pull: { likedPosts: id, repostedPosts: id } }
+        );
+        await Post.deleteOne({ _id: id });
+        res.redirect("/profile");
+    } catch (err) {
+        next(err);
+    }
+});
+
+//post info for editor
+router.post("/editor", async (req, res, next) => {
+    try {
+        const id = req.body.id;
+        const post = await Post.findOne({
+            _id: ObjectId(id),
+        });
+        const postJson = JSON.stringify(post);
+        res.send(postJson);
+    } catch (err) {
+        next(err);
+    }
+});
+
+// save changes from editor
+router.post("/saveEdit", async (req, res, next) => {
+    try {
+        console.log("here");
+        const {
+            boring,
+            editTitle,
+            editImage,
+            editDes,
+            editLink,
+            editCollab,
+            editPrivacy,
+        } = req.body;
+        await Post.updateOne(
+            { _id: ObjectId(boring) },
+            {
+                $set: {
+                    title: editTitle,
+                    description: editDes,
+                    url: editLink,
+                    otherCollaborators: editCollab,
+                    privacy: editPrivacy,
+                },
+            }
+        );
+        res.redirect("/profile");
     } catch (err) {
         next(err);
     }

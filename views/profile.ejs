@@ -4,6 +4,7 @@
         <title><%= title %></title>
         <link rel="stylesheet" href="./stylesheets/style.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script>
             // handles like click operations
             const likeEvent = (title) => {
@@ -123,19 +124,54 @@
             };
 
             // show post editor
-            const showEditor = () => {
-                document.getElementById("postEditorShade").style.display =
-                    "flex";
+            const showEditor = (post) => {
+                num = post;
+                const data = {
+                    id: post,
+                };
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:3000/profile/editor",
+                    data: data,
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        document.getElementById("boring").value = post;
+                        document.getElementById("editTitle").value = obj.title;
+                        // document.getElementById("editImage").value = obj.image;
+                        document.getElementById("editDes").value =
+                            obj.description;
+                        document.getElementById("editCollab").value =
+                            obj.otherCollaborators;
+                        document.getElementById("editPrivacy").value =
+                            obj.privacy;
+                        document.getElementById(
+                            "postEditorShade"
+                        ).style.display = "flex";
+                    },
+                    error: function (err) {
+                        console.log("error: " + err);
+                    },
+                });
             };
 
             // need to change to delete specific post
             const deletePost = () => {
-                var form = document.createElement("form");
-                form.setAttribute("method", "post");
-                form.setAttribute("action", "http://google.com");
-                form.style.display = "hidden";
-                document.body.appendChild(form);
-                form.submit();
+                let confirmAction = confirm("confirm post deletion");
+                if (confirmAction) {
+                    $.ajax({
+                        type: "post",
+                        url: "http://localhost:3000/profile/delete",
+                        data: {
+                            id: document.getElementById("boring").value,
+                        },
+                        success: function () {
+                            window.location.reload();
+                        },
+                        error: function (err) {
+                            console.log("error: " + err);
+                        },
+                    });
+                }
             };
 
             // show and hide comments
@@ -162,36 +198,68 @@
                 <div id="editorExit">
                     <div id="exitBtn" onclick="hideEditor(event)">x</div>
                 </div>
-                <form id="editorForm">
-                    <textarea id="editTitle" class="editText">
-project title</textarea
-                    >
+                <form id="editorForm" method="post" action="/profile/saveEdit">
+                    <input id="boring" style="display: none" name="boring" />
+                    <textarea
+                        id="editTitle"
+                        class="editText"
+                        name="editTitle"
+                    ></textarea>
                     <div id="smallerInputContainer">
                         image:
-                        <textarea id="editImage" class="editText">
-image</textarea
-                        >
+                        <textarea
+                            id="editImage"
+                            class="editText"
+                            name="editImage"
+                        ></textarea>
                         description:
-                        <textarea id="editDes" class="editText">
-description</textarea
-                        >
+                        <textarea
+                            id="editDes"
+                            class="editText"
+                            name="editDes"
+                        ></textarea>
                         link:
-                        <textarea id="editLink" class="editText">
-project link</textarea
-                        >
+                        <textarea
+                            id="editLink"
+                            class="editText"
+                            name="editLink"
+                        ></textarea>
                         collaborators:
-                        <textarea id="editCollab" class="editText">
-add collaborators</textarea
-                        >
+                        <textarea
+                            id="editCollab"
+                            class="editText"
+                            name="editCollab"
+                        ></textarea>
                         privacy:
-                        <select id="editPrivacy" class="editText">
+                        <select
+                            id="editPrivacy"
+                            class="editText"
+                            name="editPrivacy"
+                        >
                             <option>public</option>
                             <option>private</option>
                         </select>
-                        <input type="submit" value="save" id="editSave" />
-                        <button type="button" onclick="deletePost()">
-                            delete post
-                        </button>
+                        <div
+                            style="
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                            "
+                        >
+                            <input type="submit" value="save" id="editSave" />
+                            <button
+                                type="button"
+                                onclick="deletePost()"
+                                style="
+                                    width: 100px;
+                                    background: red;
+                                    color: white;
+                                    border-radius: 5px;
+                                "
+                            >
+                                delete post
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -257,8 +325,11 @@ add collaborators</textarea
                         <div class="following">following</div>
                         <div class="privacy"><%= posts[post].privacy %></div>
                         <div class="likeContainer">
-                            <div class="postEdit" onclick="showEditor()">
-                                go to project
+                            <div
+                                class="postEdit"
+                                onclick="showEditor(`<%= posts[post]._id %>`)"
+                            >
+                                edit project
                             </div>
                             &nbsp&nbsp
                             <div id="<%= posts[post]._id %>repostCount">
