@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="../stylesheets/style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script>
+            // handles like click operations
+            const likeEvent = (title) => {
+                const url = "http://localhost:3000/profile/like"; // change url when deployment
+                if (
+                    document.getElementById(title + "like").style
+                        .backgroundColor === ""
+                ) {
+                    document.getElementById(
+                        title + "like"
+                    ).style.backgroundColor = "rgb(211, 248, 243)";
+                    var currLike = document.getElementById(
+                        title + "likeCount"
+                    ).innerText;
+                    document.getElementById(title + "likeCount").innerText =
+                        parseInt(currLike) + 1;
+
+                    const data = {
+                        postId: title,
+                        option: "l",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                } else {
+                    document.getElementById(
+                        title + "like"
+                    ).style.backgroundColor = "";
+                    var currLike = document.getElementById(
+                        title + "likeCount"
+                    ).innerText;
+                    document.getElementById(title + "likeCount").innerText =
+                        parseInt(currLike) - 1;
+
+                    const data = {
+                        postId: title,
+                        option: "d",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                }
+            };
+
+            // handles repost click operations
+            const repostEvent = (title) => {
+                const url = "http://localhost:3000/profile/repost"; // change url when deploying
+                if (
+                    document.getElementById(title + "repost").style
+                        .backgroundColor === ""
+                ) {
+                    document.getElementById(
+                        title + "repost"
+                    ).style.backgroundColor = "rgb(211, 227, 248)";
+                    var currRepost = document.getElementById(
+                        title + "repostCount"
+                    ).innerText;
+                    document.getElementById(title + "repostCount").innerText =
+                        parseInt(currRepost) + 1;
+
+                    const data = {
+                        postId: title,
+                        option: "r",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                } else {
+                    document.getElementById(
+                        title + "repost"
+                    ).style.backgroundColor = "";
+                    var currRepost = document.getElementById(
+                        title + "repostCount"
+                    ).innerText;
+                    document.getElementById(title + "repostCount").innerText =
+                        parseInt(currRepost) - 1;
+
+                    const data = {
+                        postId: title,
+                        option: "u",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                }
+            };
+
+            // show and hide comments
+            const showHideComments = (e) => {
+                e.preventDefault();
+                var visible =
+                    document.getElementsByClassName("commentOverview")[0].style
+                        .display;
+                if (visible === "none") {
+                    document.getElementsByClassName(
+                        "commentOverview"
+                    )[0].style.display = "block";
+                } else {
+                    document.getElementsByClassName(
+                        "commentOverview"
+                    )[0].style.display = "none";
+                }
+            };
+        </script>
+    </head>
+    <body>
+        <div id="profileTitleAndFollow" class="bg-light">
+            <div id="profileTitle" style="color: rgb(71, 33, 124)">
+                <h4><%= otherUsername %></h4>
+            </div>
+            <img
+                src="../images/bubble.jpeg"
+                alt="image for project"
+                width="50px"
+                height="50px"
+            />
+            <div>
+                <form action="/otherUser/<%= otherUsername %>" method="post">
+                    projects:
+                    <select name="postType" onchange="this.form.submit()">
+                        <option value="" selected disabled hidden>
+                            <%= whichType %>
+                        </option>
+                        <option value="public">public</option>
+                        <option value="liked">liked</option>
+                        <option value="reposted">reposted</option>
+                    </select>
+                </form>
+            </div>
+            <div><%= count %> <%= whichType %> posts</div>
+            <a id="settingsBtn" href="/settings">settings</a>
+            <div id="followingsContainer">
+                <div id="following">
+                    <div>following</div>
+                    <div><%= userDetails.numFollowing %></div>
+                </div>
+                <div id="followers">
+                    <div>fans</div>
+                    <div><%= userDetails.numFollowers %></div>
+                </div>
+            </div>
+        </div>
+        <div id="profile">
+            <div id="profileInfo">
+                <div id="profilePicName">
+                    <img
+                        src="../images/bubble.jpeg"
+                        alt="image for project"
+                        width="80px"
+                        height="80px"
+                        id="profilePic"
+                    />
+                    <div id="userProfile"><%= otherUsername %></div>
+                    <div id="totalPosts"><%= userDetails.numPosts %> posts</div>
+                </div>
+                <div id="profileDescription">
+                    <%= userDetails.description %>
+                </div>
+            </div>
+            <div id="profileFeedContainer">
+                <% for (post in posts) {%>
+                <div class="postContainer">
+                    <div class="relevanceInfo">
+                        <div class="popularLabel">popular</div>
+                        <div class="tagLabel">electronic</div>
+                        <div class="following">following</div>
+                        <div class="privacy"><%= posts[post].privacy %></div>
+                        <div class="likeContainer">
+                            <div id="<%= posts[post]._id %>repostCount">
+                                <%= posts[post].repostCount %>
+                            </div>
+                            &nbsp|&nbsp
+                            <div id="<%= posts[post]._id %>likeCount">
+                                <%= posts[post].likeCount %>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        style="
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                        "
+                    >
+                        <div class="postTitle">
+                            <%= posts[post].title %>&nbsp
+                        </div>
+                    </div>
+                    <div class="postImgDes">
+                        <img
+                            src="../images/bubble.jpeg"
+                            alt="image for project"
+                            width="100px"
+                            height="100px"
+                        />
+                        <div class="postDes">
+                            <div class="postInfo">
+                                <div>
+                                    <strong><%= otherUsername %></strong>&nbsp
+                                </div>
+                                <div class="date"><%= posts[post].date %></div>
+                            </div>
+                            <div class="desInfo">
+                                <%= posts[post].description %>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="line" />
+                    <div class="interactiveBtns">
+                        <div class="comment">
+                            <div
+                                class="commentBtn"
+                                onclick="showHideComments(event)"
+                            >
+                                <%= posts[post].commentCount%> comments
+                            </div>
+                        </div>
+                        <div class="getLinkBtn" onclick="getLinkEvent()">
+                            get project link!
+                        </div>
+                        <% if (posts[post].whoReposted.includes(username)) { %>
+                        <div
+                            class="repostBtn"
+                            onclick="repostEvent('<%= posts[post]._id %>')"
+                            id="<%= posts[post]._id %>repost"
+                            style="background-color: rgb(211, 227, 248)"
+                        >
+                            repost
+                        </div>
+                        <% } else { %>
+                        <div
+                            class="repostBtn"
+                            onclick="repostEvent('<%= posts[post]._id %>')"
+                            id="<%= posts[post]._id %>repost"
+                        >
+                            repost
+                        </div>
+                        <% } %> <% if (posts[post].whoLiked.includes(username))
+                        { %>
+                        <div
+                            class="likeBtn"
+                            style="background-color: rgb(211, 248, 243)"
+                            onclick="likeEvent('<%= posts[post]._id %>')"
+                            id="<%= posts[post]._id %>like"
+                        >
+                            like
+                        </div>
+                        <% } else { %>
+                        <div
+                            class="likeBtn"
+                            onclick="likeEvent('<%= posts[post]._id %>')"
+                            id="<%= posts[post]._id %>like"
+                        >
+                            like
+                        </div>
+                        <% } %>
+                    </div>
+                    <div class="commentOverview" style="display: none">
+                        <div id="makeCommentContainer">
+                            <form
+                                style="
+                                    display: flex;
+                                    align-items: center;
+                                    width: 100%;
+                                    flex-direction: column;
+                                "
+                            >
+                                <textarea
+                                    placeholder="say something..."
+                                    class="commentText"
+                                ></textarea>
+                            </form>
+                        </div>
+                        <div class="commentSection">
+                            <div class="userComment">
+                                <div class="commentUserDate">
+                                    <div class="commentUsername">
+                                        <strong>katking123</strong>&nbsp
+                                    </div>
+                                    <div class="commentDate">Jun 22, 2022</div>
+                                </div>
+                                <div class="commentContent">
+                                    This project is great. Request sent!
+                                </div>
+                                <div class="commentActions">
+                                    <div>reply&nbsp&nbsp</div>
+                                    <div>like</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </body>
+</html>

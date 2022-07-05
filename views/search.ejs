@@ -3,7 +3,151 @@
     <head>
         <title><%= title %></title>
         <link rel="stylesheet" href="./stylesheets/style.css" />
-        <script></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            // handles like click operations
+            const likeEvent = (title) => {
+                const url = "http://localhost:3000/profile/like"; // change url when deployment
+                if (
+                    document.getElementById(title + "like").style
+                        .backgroundColor === ""
+                ) {
+                    document.getElementById(
+                        title + "like"
+                    ).style.backgroundColor = "rgb(211, 248, 243)";
+                    var currLike = document.getElementById(
+                        title + "likeCount"
+                    ).innerText;
+                    document.getElementById(title + "likeCount").innerText =
+                        parseInt(currLike) + 1;
+
+                    const data = {
+                        postId: title,
+                        option: "l",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                } else {
+                    document.getElementById(
+                        title + "like"
+                    ).style.backgroundColor = "";
+                    var currLike = document.getElementById(
+                        title + "likeCount"
+                    ).innerText;
+                    document.getElementById(title + "likeCount").innerText =
+                        parseInt(currLike) - 1;
+
+                    const data = {
+                        postId: title,
+                        option: "d",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                }
+            };
+
+            // handles repost click operations
+            const repostEvent = (title) => {
+                const url = "http://localhost:3000/profile/repost"; // change url when deploying
+                if (
+                    document.getElementById(title + "repost").style
+                        .backgroundColor === ""
+                ) {
+                    document.getElementById(
+                        title + "repost"
+                    ).style.backgroundColor = "rgb(211, 227, 248)";
+                    var currRepost = document.getElementById(
+                        title + "repostCount"
+                    ).innerText;
+                    document.getElementById(title + "repostCount").innerText =
+                        parseInt(currRepost) + 1;
+
+                    const data = {
+                        postId: title,
+                        option: "r",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                } else {
+                    document.getElementById(
+                        title + "repost"
+                    ).style.backgroundColor = "";
+                    var currRepost = document.getElementById(
+                        title + "repostCount"
+                    ).innerText;
+                    document.getElementById(title + "repostCount").innerText =
+                        parseInt(currRepost) - 1;
+
+                    const data = {
+                        postId: title,
+                        option: "u",
+                    };
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: data,
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+                }
+            };
+
+            //clear search bar
+            const clearSearchBar = () => {
+                document.getElementById("closerSearch").value = "";
+                document.getElementById("closerSearch").focus();
+            };
+
+            // show and hide comments
+            const showHideComments = (e) => {
+                e.preventDefault();
+                var visible =
+                    document.getElementsByClassName("commentOverview")[0].style
+                        .display;
+                if (visible === "none") {
+                    document.getElementsByClassName(
+                        "commentOverview"
+                    )[0].style.display = "block";
+                } else {
+                    document.getElementsByClassName(
+                        "commentOverview"
+                    )[0].style.display = "none";
+                }
+            };
+
+            //when username is clicked
+            const directToUser = (username) => {
+                const url = "http://localhost:3000/otherUser";
+                const data = {
+                    username: username,
+                };
+                if (username === "<%= name %>") {
+                    window.location = "http://localhost:3000/profile";
+                } else {
+                    window.location =
+                        "http://localhost:3000/otherUser/" + username;
+                }
+            };
+        </script>
     </head>
     <body>
         <div id="titleAndFollow">
@@ -14,6 +158,19 @@
                 <div class="filter">posts</div>
                 <div class="filter">tag</div>
                 <div class="filter">creators</div>
+                <form action="/search" method="post" id="searchForm">
+                    <input
+                        type="text"
+                        id="closerSearch"
+                        placeholder="search"
+                        value="<%= lastSearch %>"
+                        name="searchBar"
+                    />
+                    <div id="clearSearch" onclick="clearSearchBar()">
+                        <div>X</div>
+                    </div>
+                    <input type="submit" id="closerSearchBtn" value="search" />
+                </form>
             </div>
             <div id="searchContainer">
                 <select name="sort">
@@ -33,12 +190,19 @@
             <div id="searchContent">
                 <!---->
                 <div id="searchPosts">
+                    <% for (post in posts) {%>
                     <div class="postContainer">
                         <div class="relevanceInfo">
-                            <div class="tagLabel">indie</div>
-                            <div class="following">following</div>
+                            <div class="popularLabel">popular</div>
+                            <div class="tagLabel">electronic</div>
                             <div class="likeContainer">
-                                <div>13!</div>
+                                <div id="<%= posts[post]._id %>repostCount">
+                                    <%= posts[post].repostCount %>
+                                </div>
+                                &nbsp|&nbsp
+                                <div id="<%= posts[post]._id %>likeCount">
+                                    <%= posts[post].likeCount %>
+                                </div>
                             </div>
                         </div>
                         <div
@@ -48,7 +212,9 @@
                                 align-items: center;
                             "
                         >
-                            <div class="postTitle">Near&nbsp</div>
+                            <div class="postTitle">
+                                <%= posts[post].title %>&nbsp
+                            </div>
                         </div>
                         <div class="postImgDes">
                             <img
@@ -59,13 +225,19 @@
                             />
                             <div class="postDes">
                                 <div class="postInfo">
-                                    <div><strong>sandyalexg</strong>&nbsp</div>
-                                    <div class="date">Jun 22, 2022</div>
+                                    <div
+                                        id="postOwner"
+                                        onclick="directToUser('<%= posts[post].owner %>')"
+                                    >
+                                        <strong><%= posts[post].owner %></strong
+                                        >&nbsp
+                                    </div>
+                                    <div class="date">
+                                        <%= posts[post].date %>
+                                    </div>
                                 </div>
                                 <div class="desInfo">
-                                    I have worked on this project for 5 years.
-                                    Someone help me with the ending. I have
-                                    worked on this project for 5 years.
+                                    <%= posts[post].description %>
                                 </div>
                             </div>
                         </div>
@@ -76,18 +248,49 @@
                                     class="commentBtn"
                                     onclick="showHideComments(event)"
                                 >
-                                    12 comments
+                                    <%= posts[post].commentCount%> comments
                                 </div>
                             </div>
                             <div class="getLinkBtn" onclick="getLinkEvent()">
                                 get project link!
                             </div>
-                            <div class="repostBtn" onclick="repostEvent()">
+                            <% if (posts[post].whoReposted.includes(username)) {
+                            %>
+                            <div
+                                class="repostBtn"
+                                onclick="repostEvent('<%= posts[post]._id %>')"
+                                id="<%= posts[post]._id %>repost"
+                                style="background-color: rgb(211, 227, 248)"
+                            >
                                 repost
                             </div>
-                            <div class="likeBtn" onclick="likeEvent()">
+                            <% } else { %>
+                            <div
+                                class="repostBtn"
+                                onclick="repostEvent('<%= posts[post]._id %>')"
+                                id="<%= posts[post]._id %>repost"
+                            >
+                                repost
+                            </div>
+                            <% } %> <% if
+                            (posts[post].whoLiked.includes(username)) { %>
+                            <div
+                                class="likeBtn"
+                                style="background-color: rgb(211, 248, 243)"
+                                onclick="likeEvent('<%= posts[post]._id %>')"
+                                id="<%= posts[post]._id %>like"
+                            >
                                 like
                             </div>
+                            <% } else { %>
+                            <div
+                                class="likeBtn"
+                                onclick="likeEvent('<%= posts[post]._id %>')"
+                                id="<%= posts[post]._id %>like"
+                            >
+                                like
+                            </div>
+                            <% } %>
                         </div>
                         <div class="commentOverview" style="display: none">
                             <div id="makeCommentContainer">
@@ -119,106 +322,14 @@
                                         This project is great. Request sent!
                                     </div>
                                     <div class="commentActions">
-                                        <div>reply&nbsp</div>
+                                        <div>reply&nbsp&nbsp</div>
                                         <div>like</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="postContainer">
-                        <div class="relevanceInfo">
-                            <div class="tagLabel">indie</div>
-                            <div class="following">following</div>
-                            <div class="likeContainer">
-                                <div>13!</div>
-                            </div>
-                        </div>
-                        <div
-                            style="
-                                display: flex;
-                                flex-direction: row;
-                                align-items: center;
-                            "
-                        >
-                            <div class="postTitle">Near&nbsp</div>
-                        </div>
-                        <div class="postImgDes">
-                            <img
-                                src="./images/bubble.jpeg"
-                                alt="image for project"
-                                width="100px"
-                                height="100px"
-                            />
-                            <div class="postDes">
-                                <div class="postInfo">
-                                    <div><strong>sandyalexg</strong>&nbsp</div>
-                                    <div class="date">Jun 22, 2022</div>
-                                </div>
-                                <div class="desInfo">
-                                    I have worked on this project for 5 years.
-                                    Someone help me with the ending. I have
-                                    worked on this project for 5 years.
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="line" />
-                        <div class="interactiveBtns">
-                            <div class="comment">
-                                <div
-                                    class="commentBtn"
-                                    onclick="showHideComments(event)"
-                                >
-                                    12 comments
-                                </div>
-                            </div>
-                            <div class="getLinkBtn" onclick="getLinkEvent()">
-                                get project link!
-                            </div>
-                            <div class="repostBtn" onclick="repostEvent()">
-                                repost
-                            </div>
-                            <div class="likeBtn" onclick="likeEvent()">
-                                like
-                            </div>
-                        </div>
-                        <div class="commentOverview" style="display: none">
-                            <div id="makeCommentContainer">
-                                <form
-                                    style="
-                                        display: flex;
-                                        align-items: center;
-                                        width: 100%;
-                                        flex-direction: column;
-                                    "
-                                >
-                                    <textarea
-                                        placeholder="say something..."
-                                        class="commentText"
-                                    ></textarea>
-                                </form>
-                            </div>
-                            <div class="commentSection">
-                                <div class="userComment">
-                                    <div class="commentUserDate">
-                                        <div class="commentUsername">
-                                            <strong>katking123</strong>&nbsp
-                                        </div>
-                                        <div class="commentDate">
-                                            Jun 22, 2022
-                                        </div>
-                                    </div>
-                                    <div class="commentContent">
-                                        This project is great. Request sent!
-                                    </div>
-                                    <div class="commentActions">
-                                        <div>reply&nbsp</div>
-                                        <div>like</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <% } %>
                 </div>
                 <div id="rec">
                     <div id="recommendedTags">

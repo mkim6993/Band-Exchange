@@ -572,6 +572,7 @@ a {
 #category {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .filter {
@@ -691,4 +692,52 @@ a {
 #collabSearch {
   display: flex;
   flex-direction: row;
+}
+
+#closerSearch {
+  height: 30px;
+  padding-left: 5px;
+  margin-left: 10px;
+}
+
+#closerSearchBtn {
+  margin-left: 8px;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  text-align: center;
+}
+
+#closerSearchBtn:hover {
+  background-color: rgb(209, 209, 209);
+}
+
+#closerSearch {
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+#searchForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#clearSearch {
+  margin-left: 5px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+#clearSearch:hover {
+  background-color: rgb(209, 209, 209);
+  cursor: pointer;
+}
+
+#postOwner:hover {
+  cursor: pointer;
 }

@@ -48,6 +48,7 @@ var profileRouter = require("./routes/profile");
 var settingsRouter = require("./routes/settings");
 var apiRouter = require("./routes/api");
 var searchRouter = require("./routes/search");
+var otherUserRouter = require("./routes/otherUser");
 
 // *********************************************************** //
 //  Express sessions
@@ -98,6 +99,7 @@ app.use("/profile", profileRouter);
 app.use("/settings", settingsRouter);
 app.use("/api", apiRouter);
 app.use("/search", searchRouter);
+app.use("/otherUser", otherUserRouter);
 
 // *********************************************************** //
 // Server error handling
