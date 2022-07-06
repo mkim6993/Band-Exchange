@@ -136,15 +136,13 @@
 
             //when username is clicked
             const directToUser = (username) => {
-                const url = "http://localhost:3000/otherUser";
                 const data = {
                     username: username,
                 };
                 if (username === "<%= name %>") {
                     window.location = "http://localhost:3000/profile";
                 } else {
-                    window.location =
-                        "http://localhost:3000/otherUser/" + username;
+                    window.location = "http://localhost:3000/user/" + username;
                 }
             };
         </script>

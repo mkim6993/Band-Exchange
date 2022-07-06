@@ -184,7 +184,14 @@ router.post("/delete", async (req, res, next) => {
         // remove all instance of postID in users' likedPosts and repostedPosts
         await UserInfo.updateMany(
             {},
-            { $pull: { likedPosts: id, repostedPosts: id } }
+            {
+                $pull: { likedPosts: id, repostedPosts: id },
+            }
+        );
+        // decrement numPosts from UserInfo
+        await UserInfo.updateOne(
+            { username: req.session.username },
+            { $inc: { numPosts: -1 } }
         );
         await Post.deleteOne({ _id: id });
         res.redirect("/profile");

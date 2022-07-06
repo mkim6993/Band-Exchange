@@ -1,4 +1,5 @@
 var express = require("express");
+const { ObjectId } = require("mongodb");
 var router = express.Router();
 const Posts = require("../models/ProjectPost");
 const UserInfo = require("../models/UserInfo");
@@ -11,6 +12,7 @@ const isLoggedIn = (req, res, next) => {
     }
 };
 
+// get other user's profile page
 router.get("/:username", isLoggedIn, async (req, res, next) => {
     try {
         const username = req.params["username"];
@@ -48,7 +50,6 @@ router.post("/:username", isLoggedIn, async (req, res, next) => {
         });
         // search users public, liked, or reposted posts
         if (type === "public") {
-            console.log("PULICCC");
             const usersPosts = await Posts.find({
                 owner: username,
                 privacy: req.body.postType,
@@ -66,13 +67,10 @@ router.post("/:username", isLoggedIn, async (req, res, next) => {
                     username: username,
                 });
                 var obj_id = [];
-                console.log(likedPosts.likedPosts.length);
                 for (var i = 0; i < likedPosts.likedPosts.length; i++) {
                     var obj = new ObjectId(likedPosts.likedPosts[i]);
-                    console.log(obj); // doesnt create new object ID issue
                     obj_id.push(obj);
                 }
-                console.log(obj_id);
                 const posts = await Posts.find({
                     _id: { $in: obj_id },
                 }).sort({ date_time: -1 });
@@ -103,8 +101,53 @@ router.post("/:username", isLoggedIn, async (req, res, next) => {
         }
         res.locals.userDetails = userDetails;
         res.locals.whichType = req.body.postType;
-        res.locals.otherUsername = req.session.username;
+        res.locals.otherUsername = username;
+        res.locals.username = req.session.username;
         res.render("otherUser", { title: username });
+    } catch (err) {}
+});
+
+// follow
+router.post("/:username/follow", isLoggedIn, async (req, res, next) => {
+    try {
+        const otherUser = req.params["username"];
+        const user = req.session.username;
+        await UserInfo.updateOne(
+            { username: otherUser },
+            {
+                $push: { followers: user },
+                $inc: { numFollowers: 1 },
+            }
+        );
+        await UserInfo.updateOne(
+            { username: user },
+            {
+                $push: { following: otherUser },
+                $inc: { numFollowing: 1 },
+            }
+        );
+    } catch (err) {}
+});
+
+// unfollow
+router.post("/:username/unfollow", isLoggedIn, async (req, res, next) => {
+    try {
+        const otherUser = req.params["username"];
+        const user = req.session.username;
+        await UserInfo.updateOne(
+            { username: otherUser },
+            {
+                $pull: { followers: user },
+                $inc: { numFollowers: -1 },
+            }
+        );
+        await UserInfo.updateOne(
+            { username: user },
+            {
+                $pull: { following: otherUser },
+                $inc: { numFollowing: -1 },
+            }
+        );
     } catch (err) {}
 });
 

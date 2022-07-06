@@ -741,3 +741,79 @@ a {
 #postOwner:hover {
   cursor: pointer;
 }
+
+#followBtnContainer {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#followBtn {
+  width: 100px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+#followBtn:hover {
+  background-color: rgb(234, 234, 234);
+  cursor: pointer;
+}
+
+#unfollowMessage {
+  background-color: rgba(202, 202, 202, 0.449);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  justify-content: center;
+  display: none;
+}
+
+#unfollowContainer {
+  background-color: white;
+  height: 300px;
+  width: 500px;
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
+
+#unfollowHr {
+  border: 1px solid gray;
+  width: 100%;
+  margin: 0px;
+}
+
+#unfollowOption {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#cancelOption {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#unfollowOption:hover {
+  cursor: pointer;
+  width: 100%;
+}
+
+#cancelOption:hover {
+  cursor: pointer;
+}

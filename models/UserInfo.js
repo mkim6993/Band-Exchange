@@ -6,8 +6,8 @@ var userInfoSchema = Schema({
     username: String,
     numFollowers: Number,
     numFollowing: Number,
-    followers: [String],
-    following: [String],
+    followers: [String], // usernames of followers
+    following: [String], // usernames of following
     numPosts: Number,
     description: String,
     likedPosts: [String], // ids of posts

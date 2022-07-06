@@ -128,9 +128,98 @@
                     )[0].style.display = "none";
                 }
             };
+
+            // follow user and show unfollow message
+            const followUser = (otherUser) => {
+                var inner = document.getElementById("followUnfollow").innerText;
+                // if not following user already
+                if (inner === "follow") {
+                    console.log("following now");
+                    // follow post request
+                    $.ajax({
+                        type: "post",
+                        url:
+                            "http://localhost:3000/user/" +
+                            otherUser +
+                            "/follow",
+                        success: function (data) {
+                            console.log(data);
+                        },
+                    });
+
+                    // change styling, change fan count
+                    document.getElementById("followBtn").style.backgroundColor =
+                        "rgb(211, 248, 243)";
+                    document.getElementById("followUnfollow").innerText =
+                        "following";
+                    var fans = document.getElementById("fanCount").innerText;
+                    var inc = parseInt(fans) + 1;
+                    document.getElementById("fanCount").innerText = inc;
+                } else {
+                    console.log("unfollow pop-up");
+                    // unfollow option, show unfollow message
+                    document.getElementById("unfollowMessage").style.display =
+                        "flex";
+                }
+            };
+            // unfollow event
+            const unfollowUser = (otherUser) => {
+                // unfollow post request
+                $.ajax({
+                    type: "post",
+                    url:
+                        "http://localhost:3000/user/" + otherUser + "/unfollow",
+                    success: function (data) {
+                        console.log(data);
+                    },
+                });
+
+                // change styling and change fan count
+                var fans = document.getElementById("fanCount").innerText;
+                var inc = parseInt(fans) - 1;
+                document.getElementById("fanCount").innerText = inc;
+                document.getElementById("followBtn").style.backgroundColor =
+                    "white";
+                document.getElementById("followUnfollow").innerText = "follow";
+                document.getElementById("unfollowMessage").style.display =
+                    "none";
+            };
+
+            //hide unfollow message
+            const hideUnfollow = () => {
+                // hide unfollow message without doing anything
+                document.getElementById("unfollowMessage").style.display =
+                    "none";
+            };
         </script>
     </head>
     <body>
+        <div id="unfollowMessage">
+            <div id="unfollowContainer">
+                <img
+                    src="../images/bubble.jpeg"
+                    alt="profile image"
+                    width="80px"
+                    height="80px"
+                    id="profilePic"
+                    style="margin-right: 0px; margin-top: 30px"
+                />
+                <div style="margin-top: 30px; margin-bottom: 30px">
+                    unfollow <%= otherUsername %>?
+                </div>
+                <hr id="unfollowHr" />
+                <div
+                    id="unfollowOption"
+                    onclick="unfollowUser('<%= otherUsername %>')"
+                >
+                    <strong style="color: red">unfollow</strong>
+                </div>
+                <hr id="unfollowHr" />
+                <div id="cancelOption" onclick="hideUnfollow()">
+                    <div>cancel</div>
+                </div>
+            </div>
+        </div>
         <div id="profileTitleAndFollow" class="bg-light">
             <div id="profileTitle" style="color: rgb(71, 33, 124)">
                 <h4><%= otherUsername %></h4>
@@ -142,7 +231,7 @@
                 height="50px"
             />
             <div>
-                <form action="/otherUser/<%= otherUsername %>" method="post">
+                <form action="/user/<%= otherUsername %>" method="post">
                     projects:
                     <select name="postType" onchange="this.form.submit()">
                         <option value="" selected disabled hidden>
@@ -163,7 +252,7 @@
                 </div>
                 <div id="followers">
                     <div>fans</div>
-                    <div><%= userDetails.numFollowers %></div>
+                    <div id="fanCount"><%= userDetails.numFollowers %></div>
                 </div>
             </div>
         </div>
@@ -179,6 +268,25 @@
                     />
                     <div id="userProfile"><%= otherUsername %></div>
                     <div id="totalPosts"><%= userDetails.numPosts %> posts</div>
+                    <div id="followBtnContainer">
+                        <% if (userDetails.followers.includes(username)) { %>
+                        <div
+                            id="followBtn"
+                            onclick="followUser('<%= otherUsername %>')"
+                            style="background-color: rgb(211, 248, 243)"
+                        >
+                            <div id="followUnfollow">following</div>
+                        </div>
+                        <% } else { %>
+                        <div
+                            id="followBtn"
+                            onclick="followUser('<%= otherUsername %>')"
+                            style="background-color: white"
+                        >
+                            <div id="followUnfollow">follow</div>
+                        </div>
+                        <% } %>
+                    </div>
                 </div>
                 <div id="profileDescription">
                     <%= userDetails.description %>
@@ -223,7 +331,8 @@
                         <div class="postDes">
                             <div class="postInfo">
                                 <div>
-                                    <strong><%= otherUsername %></strong>&nbsp
+                                    <strong><%= posts[post].owner %></strong
+                                    >&nbsp
                                 </div>
                                 <div class="date"><%= posts[post].date %></div>
                             </div>
