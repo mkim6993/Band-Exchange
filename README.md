@@ -1,3 +1,5 @@
+demo of the site can be found here: https://tranquil-island-87679.herokuapp.com/
+
 ### Purpose
 Platform to connect music producers to share ideas, create music, and to collaborate on projects.
 BandExchange allows you to present your projects in a post format that makes it easier for other users to find and interact with your posts.
