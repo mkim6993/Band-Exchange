@@ -8,7 +8,8 @@
         <script>
             // handles like click operations
             const likeEvent = (title) => {
-                const url = "http://localhost:3000/profile/like"; // change url when deployment
+                const url =
+                    "https://tranquil-island-87679.herokuapp.com/profile/like"; // change url when deployment
                 if (
                     document.getElementById(title + "like").style
                         .backgroundColor === ""
@@ -61,7 +62,8 @@
 
             // handles repost click operations
             const repostEvent = (title) => {
-                const url = "http://localhost:3000/profile/repost"; // change url when deploying
+                const url =
+                    "https://tranquil-island-87679.herokuapp.com/profile/repost"; // change url when deploying
                 if (
                     document.getElementById(title + "repost").style
                         .backgroundColor === ""
@@ -138,7 +140,7 @@
                 };
                 $.ajax({
                     type: "post",
-                    url: "http://localhost:3000/profile/editor",
+                    url: "https://tranquil-island-87679.herokuapp.com/profile/editor",
                     data: data,
                     success: function (data) {
                         var obj = JSON.parse(data);
@@ -167,7 +169,7 @@
                 if (confirmAction) {
                     $.ajax({
                         type: "post",
-                        url: "http://localhost:3000/profile/delete",
+                        url: "https://tranquil-island-87679.herokuapp.com/profile/delete",
                         data: {
                             id: document.getElementById("boring").value,
                         },
@@ -304,7 +306,7 @@
                         };
                         $.ajax({
                             type: "post",
-                            url: "http://localhost:3000/profile/follow",
+                            url: "https://tranquil-island-87679.herokuapp.com/profile/follow",
                             data: data,
                             success: function (res) {
                                 console.log(res);
@@ -351,7 +353,7 @@
                         };
                         $.ajax({
                             type: "post",
-                            url: "http://localhost:3000/profile/follow",
+                            url: "https://tranquil-island-87679.herokuapp.com/profile/follow",
                             data: data,
                             success: function (res) {
                                 console.log(res);
@@ -396,7 +398,7 @@
                 };
                 $.ajax({
                     type: "post",
-                    url: "http://localhost:3000/profile/unfollow",
+                    url: "https://tranquil-island-87679.herokuapp.com/profile/unfollow",
                     data: data,
                     success: function (res) {
                         console.log(res);

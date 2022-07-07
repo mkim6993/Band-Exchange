@@ -7,7 +7,8 @@
         <script>
             // handles like click operations
             const likeEvent = (title) => {
-                const url = "http://localhost:3000/profile/like"; // change url when deployment
+                const url =
+                    "https://tranquil-island-87679.herokuapp.com/profile/like"; // change url when deployment
                 if (
                     document.getElementById(title + "like").style
                         .backgroundColor === ""
@@ -60,7 +61,8 @@
 
             // handles repost click operations
             const repostEvent = (title) => {
-                const url = "http://localhost:3000/profile/repost"; // change url when deploying
+                const url =
+                    "https://tranquil-island-87679.herokuapp.com/profile/repost"; // change url when deploying
                 if (
                     document.getElementById(title + "repost").style
                         .backgroundColor === ""
@@ -140,9 +142,12 @@
                     username: username,
                 };
                 if (username === "<%= name %>") {
-                    window.location = "http://localhost:3000/profile";
+                    window.location =
+                        "https://tranquil-island-87679.herokuapp.com/profile";
                 } else {
-                    window.location = "http://localhost:3000/user/" + username;
+                    window.location =
+                        "https://tranquil-island-87679.herokuapp.com/user/" +
+                        username;
                 }
             };
         </script>
