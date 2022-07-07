@@ -5,6 +5,7 @@ Similar to social media apps, users can follow their favorite creators, like and
 
 ### Developer Notes
 *This app is only compatible with a web browser.
+
 Webstack: 
 Node.js + Express.js + MongoDB + EJS + HTML/CSS
 
