@@ -245,4 +245,79 @@ router.post("/saveEdit", async (req, res, next) => {
     }
 });
 
+// unfollow person
+router.post("/unfollow", isLoggedIn, async (req, res, next) => {
+    try {
+        const { unfollowingUser } = req.body;
+        const user = req.session.username;
+
+        await UserInfo.updateOne(
+            { username: user },
+            {
+                $inc: { numFollowing: -1 },
+                $pull: { following: unfollowingUser },
+            }
+        );
+        await UserInfo.updateOne(
+            { username: unfollowingUser },
+            {
+                $inc: { numFollowers: -1 },
+                $pull: { followers: user },
+            }
+        );
+    } catch (err) {
+        next(err);
+    }
+});
+
+router.post("/follow", isLoggedIn, async (req, res, next) => {
+    try {
+        const { followingUser } = req.body;
+        const user = req.session.username;
+
+        await UserInfo.updateOne(
+            { username: user },
+            {
+                $inc: { numFollowing: 1 },
+                $push: { following: followingUser },
+            }
+        );
+        await UserInfo.updateOne(
+            { username: followingUser },
+            {
+                $inc: { numFollowers: 1 },
+                $push: { followers: user },
+            }
+        );
+    } catch (err) {
+        next(err);
+    }
+});
+
+// use to get array of followers and following
+//
+// get list of followers
+// router.get("/following", isLoggedIn, async (req, res, next) => {
+//     try {
+//         var info = await UserInfo.findOne({
+//             username: req.session.username,
+//         });
+//         res.send(info.following);
+//     } catch (err) {
+//         next(err);
+//     }
+// });
+
+// //get list of following
+// router.get("/followers", isLoggedIn, async (req, res, next) => {
+//     try {
+//         var info = await UserInfo.findOne({
+//             username: req.session.username,
+//         });
+//         res.send(info.followers);
+//     } catch (err) {
+//         next(err);
+//     }
+// });
+
 module.exports = router;

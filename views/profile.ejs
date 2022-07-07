@@ -123,6 +123,13 @@
                 }
             };
 
+            const hideFollowers = (e) => {
+                if (e.target.id === "followInfoShade") {
+                    document.getElementById("followInfoShade").style.display =
+                        "none";
+                }
+            };
+
             // show post editor
             const showEditor = (post) => {
                 num = post;
@@ -190,9 +197,356 @@
                     )[0].style.display = "none";
                 }
             };
+
+            // show who youre following
+            const showFollowing = () => {
+                document.getElementById("fansSecBtn").style.borderBottom = "";
+                document.getElementById("followSecBtn").style.borderBottom =
+                    "1px solid gray";
+                document.getElementById("followInfoShade").style.display =
+                    "flex";
+                document.getElementById("userFans").style.display = "none";
+                document.getElementById("userFollowing").style.display = "flex";
+                // back end to get all following
+                // $.ajax({
+                //     type: "get",
+                //     url: "http://localhost:3000/profile/following",
+                //     success: function (followingArr) {
+                //         document.getElementById("listOfUsers").innerHTML = "";
+                //         for (user of followingArr) {
+                //             document.getElementById("listOfUsers").innerHTML +=
+                //                 "<div id='userPreview'><div id='previewImageName'><img src='./images/bubble.jpeg' alt='image for project' width='30px' height='30px' id='profilePic' style='margin-right: 10px'/> <div>" +
+                //                 user +
+                //                 "</div></div><div id='followingOptions'><div>following</div></div></div>";
+                //         }
+                //         document.getElementById(
+                //             "fansSecBtn"
+                //         ).style.borderBottom = "";
+                //         document.getElementById(
+                //             "followSecBtn"
+                //         ).style.borderBottom = "1px solid gray";
+                //         document.getElementById(
+                //             "followInfoShade"
+                //         ).style.display = "flex";
+                //     },
+                // });
+            };
+
+            // show who your fans
+            const showFans = () => {
+                document.getElementById("followSecBtn").style.borderBottom = "";
+                document.getElementById("fansSecBtn").style.borderBottom =
+                    "1px solid gray";
+                document.getElementById("followInfoShade").style.display =
+                    "flex";
+                document.getElementById("userFollowing").style.display = "none";
+                document.getElementById("userFans").style.display = "flex";
+
+                //backend to get all followers
+                // $.ajax({
+                //     type: "get",
+                //     url: "http://localhost:3000/profile/followers",
+                //     success: function (followingArr) {
+                //         document.getElementById("listOfUsers").innerHTML = "";
+                //         for (user of followingArr) {
+                //             console.log(user);
+                //             document.getElementById("listOfUsers").innerHTML +=
+                //                 "<div id='userPreview'><div id='previewImageName'><img src='./images/bubble.jpeg' alt='image for project' width='30px' height='30px' id='profilePic' style='margin-right: 10px'/> <strong>" +
+                //                 user +
+                //                 "<strong></div><div id='followingOptions' onclick='unfollowUser()'><div>following</div></div></div>";
+                //         }
+                //         document.getElementById(
+                //             "followSecBtn"
+                //         ).style.borderBottom = "";
+                //         document.getElementById(
+                //             "fansSecBtn"
+                //         ).style.borderBottom = "1px solid gray";
+                //         document.getElementById(
+                //             "followInfoShade"
+                //         ).style.display = "flex";
+                //     },
+                // });
+            };
+
+            var unfollowingUser = "";
+            var nullCase = false;
+
+            // show unfollow message when "following" is clicked
+            const showUnfollow = (user) => {
+                // get user's name to see if they are following selected user
+                unfollowingUser = user;
+                const userStatus = "followingStatus" + user;
+                const follow = document.getElementById(userStatus).innerText;
+                const userStatusF = "followingStatusFollower" + user;
+                var followerF = "";
+
+                // follow is the follow status in the following info, followerF is the follow status in the fans info
+                // if followerF is null, then the selected user is not following you. only you are following them
+                try {
+                    followerF = document.getElementById(userStatusF).innerText;
+                } catch (err) {
+                    nullCase = true;
+                }
+                // if you are following the user and the user is following you
+                if (!nullCase) {
+                    // if you are following them and you decide to unfollow...
+                    if (follow === "following" || followerF === "following") {
+                        document.getElementById(
+                            "unfollowMessage"
+                        ).style.display = "flex";
+                        document.getElementById("unfollowQuestion").innerText =
+                            "unfollow " + user + "?";
+                        // else if you unfollow and decide to follow again OR if they are following you and you want to follow back
+                    } else {
+                        // BACKEND
+                        const data = {
+                            followingUser: unfollowingUser,
+                        };
+                        $.ajax({
+                            type: "post",
+                            url: "http://localhost:3000/profile/follow",
+                            data: data,
+                            success: function (res) {
+                                console.log(res);
+                            },
+                        });
+
+                        // FRONTEND
+                        const followCount = parseInt(
+                            document.getElementById("followingCount").innerText
+                        );
+                        document.getElementById("followingCount").innerText =
+                            followCount + 1;
+                        const userStatus = "followingStatus" + unfollowingUser;
+                        const userOptions =
+                            "followingOptions" + unfollowingUser;
+                        const userStatusF =
+                            "followingStatusFollower" + unfollowingUser;
+                        const userOptionsF =
+                            "followingOptionsFollower" + unfollowingUser;
+                        document.getElementById(
+                            userOptions
+                        ).style.backgroundColor = "rgb(211, 248, 243)";
+                        document.getElementById(userStatus).innerText =
+                            "following";
+                        document.getElementById(
+                            userOptionsF
+                        ).style.backgroundColor = "rgb(211, 248, 243)";
+                        document.getElementById(userStatusF).innerText =
+                            "following";
+                    }
+                    // if you are following them but they are not following you
+                } else {
+                    if (follow === "following") {
+                        document.getElementById(
+                            "unfollowMessage"
+                        ).style.display = "flex";
+                        document.getElementById("unfollowQuestion").innerText =
+                            "unfollow " + user + "?";
+                        // if you want to follow them back
+                    } else {
+                        //BACKEND
+                        const data = {
+                            followingUser: unfollowingUser,
+                        };
+                        $.ajax({
+                            type: "post",
+                            url: "http://localhost:3000/profile/follow",
+                            data: data,
+                            success: function (res) {
+                                console.log(res);
+                            },
+                        });
+
+                        //FRONTEND
+                        const followCount = parseInt(
+                            document.getElementById("followingCount").innerText
+                        );
+                        document.getElementById("followingCount").innerText =
+                            followCount + 1;
+                        const userStatus = "followingStatus" + unfollowingUser;
+                        const userOptions =
+                            "followingOptions" + unfollowingUser;
+                        document.getElementById(
+                            userOptions
+                        ).style.backgroundColor = "rgb(211, 248, 243)";
+                        document.getElementById(userStatus).innerText =
+                            "following";
+                    }
+                }
+            };
+
+            // hide unfollow message
+            const hideUnfollowMessage = (e) => {
+                if (
+                    e.target.id === "unfollowMessage" ||
+                    e.target.id === "cancelOption" ||
+                    e.target.id === "cancelTitle"
+                ) {
+                    document.getElementById("unfollowMessage").style.display =
+                        "none";
+                }
+            };
+
+            // unfollow user
+            const unfollowUser = () => {
+                //BACKEND
+                const data = {
+                    unfollowingUser: unfollowingUser,
+                };
+                $.ajax({
+                    type: "post",
+                    url: "http://localhost:3000/profile/unfollow",
+                    data: data,
+                    success: function (res) {
+                        console.log(res);
+                    },
+                });
+
+                //FRONTEND
+                // decrement 1 from your following list
+                const followCount = parseInt(
+                    document.getElementById("followingCount").innerText
+                );
+                document.getElementById("followingCount").innerText =
+                    followCount - 1;
+                const userStatus = "followingStatus" + unfollowingUser;
+                const userOptions = "followingOptions" + unfollowingUser;
+                // if you unfollow someone that is following you already
+                if (!nullCase) {
+                    const userStatusF =
+                        "followingStatusFollower" + unfollowingUser;
+                    const userOptionsF =
+                        "followingOptionsFollower" + unfollowingUser;
+                    document.getElementById(userOptions).style.backgroundColor =
+                        "white";
+                    document.getElementById(userStatus).innerText = "follow";
+                    document.getElementById(
+                        userOptionsF
+                    ).style.backgroundColor = "white";
+                    document.getElementById(userStatusF).innerText = "follow";
+                    // if you unfollow someone that isn't following you
+                } else {
+                    document.getElementById(userOptions).style.backgroundColor =
+                        "white";
+                    document.getElementById(userStatus).innerText = "follow";
+                }
+                document.getElementById("unfollowMessage").style.display =
+                    "none";
+                // reset null case
+                nullCase = false;
+            };
         </script>
     </head>
     <body>
+        <div
+            id="unfollowMessage"
+            style="backgroundcolor: none; z-index: 2"
+            onclick="hideUnfollowMessage(event)"
+        >
+            <div id="unfollowContainer">
+                <img
+                    src="../images/bubble.jpeg"
+                    alt="profile image"
+                    width="80px"
+                    height="80px"
+                    id="profilePic"
+                    style="margin-right: 0px; margin-top: 30px"
+                />
+                <div
+                    style="margin-top: 30px; margin-bottom: 30px"
+                    id="unfollowQuestion"
+                ></div>
+                <hr id="unfollowHr" />
+                <div id="unfollowOption" onclick="unfollowUser()">
+                    <strong style="color: red">unfollow</strong>
+                </div>
+                <hr id="unfollowHr" />
+                <div id="cancelOption">
+                    <div id="cancelTitle">cancel</div>
+                </div>
+            </div>
+        </div>
+        <div id="followInfoShade" onclick="hideFollowers(event)">
+            <div id="followInfoContainer">
+                <div id="followInfoHeader">
+                    <div id="followSecBtn" onclick="showFollowing()">
+                        <div>following</div>
+                    </div>
+                    <div id="fansSecBtn" onclick="showFans()">
+                        <div>fans</div>
+                    </div>
+                </div>
+                <div id="listOfUsers">
+                    <div id="userFollowing" style="flex-direction: column">
+                        <% for (user of userDetails.following) { %>
+                        <div id="userPreview">
+                            <div id="previewImageName">
+                                <img
+                                    src="./images/bubble.jpeg"
+                                    alt="image for project"
+                                    width="30px"
+                                    height="30px"
+                                    id="profilePic"
+                                    style="margin-right: 10px"
+                                />
+                                <strong><%= user %></strong>
+                            </div>
+                            <div
+                                class="followingOptions"
+                                id="followingOptions<%= user%>"
+                                onclick="showUnfollow('<%= user %>')"
+                                style="background-color: rgb(211, 248, 243)"
+                            >
+                                <div id="followingStatus<%= user %>">
+                                    following
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                    <div id="userFans" style="flex-direction: column">
+                        <% for (user of userDetails.followers) { %>
+                        <div id="userPreview">
+                            <div id="previewImageName">
+                                <img
+                                    src="./images/bubble.jpeg"
+                                    alt="image for project"
+                                    width="30px"
+                                    height="30px"
+                                    id="profilePic"
+                                    style="margin-right: 10px"
+                                />
+                                <strong><%= user %></strong>
+                            </div>
+                            <% if (userDetails.following.includes(user)) { %>
+                            <div
+                                class="followingOptions"
+                                id="followingOptionsFollower<%= user%>"
+                                onclick="showUnfollow('<%= user %>')"
+                                style="background-color: rgb(211, 248, 243)"
+                            >
+                                <div id="followingStatusFollower<%= user %>">
+                                    following
+                                </div>
+                            </div>
+                            <% } else { %>
+                            <div
+                                class="followingOptions"
+                                id="followingOptionsFollower<%= user%>"
+                                onclick="showUnfollow('<%= user %>')"
+                            >
+                                <div id="followingStatusFollower<%= user %>">
+                                    follow
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="postEditorShade" onclick="hideEditor(event)">
             <div id="postEditorContainer">
                 <div id="editorExit">
@@ -289,13 +643,15 @@
             <div><%= count %> <%= whichType %> posts</div>
             <a id="settingsBtn" href="/settings">settings</a>
             <div id="followingsContainer">
-                <div id="following">
+                <div id="following" onclick="showFollowing()">
                     <div>following</div>
-                    <div><%= userDetails.numFollowing %></div>
+                    <div id="followingCount">
+                        <%= userDetails.numFollowing %>
+                    </div>
                 </div>
-                <div id="followers">
+                <div id="followers" onclick="showFans()">
                     <div>fans</div>
-                    <div><%= userDetails.numFollowers %></div>
+                    <div id="fansCount"><%= userDetails.numFollowers %></div>
                 </div>
             </div>
         </div>

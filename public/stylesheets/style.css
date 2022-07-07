@@ -285,7 +285,6 @@ a {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 5px;
   border: 1px solid black;
 }
 
@@ -298,6 +297,12 @@ a {
   flex-direction: column;
 }
 
+#following:hover {
+  border: 1px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 #followers {
   height: 100%;
   width: 50%;
@@ -305,6 +310,12 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+#followers:hover {
+  border: 1px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 #titleAndFollow {
@@ -815,5 +826,105 @@ a {
 }
 
 #cancelOption:hover {
+  cursor: pointer;
+}
+
+#otherUserActivity {
+  background-color: rgb(247, 247, 247);
+  margin-top: 20px;
+  height: 400px;
+  width: 400px;
+  border: 1px solid rgb(143, 143, 143);
+  border-radius: 3px;
+  padding: 5px;
+}
+
+#followInfoShade {
+  background-color: rgba(202, 202, 202, 0.449);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  justify-content: center;
+  display: none;
+}
+
+#followInfoContainer {
+  background-color: white;
+  height: 300px;
+  width: 300px;
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
+
+#followInfoHeader {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  font-size: 15px;
+  width: 100%;
+}
+
+#followSecBtn {
+  width: 50%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+#followSecBtn:hover {
+  cursor: pointer;
+}
+
+#fansSecBtn {
+  width: 50%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+#fansSecBtn:hover {
+  cursor: pointer;
+}
+
+#listOfUsers {
+  width: 95%;
+  margin-top: 5px;
+  overflow: scroll;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 280px;
+}
+
+#listOfUsers::-webkit-scrollbar {
+  width: 0px;
+}
+
+#userPreview {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+
+#previewImageName {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.followingOptions {
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray; 
+  border-radius: 3px;
   cursor: pointer;
 }
