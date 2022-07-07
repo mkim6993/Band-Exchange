@@ -1,9 +1,7 @@
 # Band-Exchange
 
-### 1. Elevator Pitch
-- Create audio recordings through IOS device or browser
-- Choose desired recording and create a complementing harmony
-- Can be used as digital instrument
+### Purpose
+Platform to connect music producers to share ideas, create music, and to collaborate on projects.
 
 ### 2. Developer Notes
 
