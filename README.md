@@ -50,7 +50,8 @@ Additions:
 ### 4. SnapShots
 ![Screen Shot 2022-07-07 at 1 23 21 AM](https://user-images.githubusercontent.com/50627842/177698432-719ff23c-2ab9-4ce6-80bc-0f847f0b4eb5.png)
 ![Screen Shot 2022-07-07 at 1 23 36 AM](https://user-images.githubusercontent.com/50627842/177698449-edbd7b07-1727-4a7e-9ad4-9ec79eed1d55.png)
-![Screen Shot 2022-07-07 at 1 23 51 AM](https://user-images.githubusercontent.com/50627842/17769845![Screen Shot 2022-07-07 at 1 24 02 AM](https://user-images.githubusercontent.com/50627842/177698467-940dc8b5-d186-44b0-b5a4-0c2045faf2f9.png)
+![Screen Shot 2022-07-07 at 1 23 51 AM](https://user-images.githubusercontent.com/50627842/17769845
+![Screen Shot 2022-07-07 at 1 24 02 AM](https://user-images.githubusercontent.com/50627842/177698467-940dc8b5-d186-44b0-b5a4-0c2045faf2f9.png)
 8-d39931d4-c345-4bcc-8320-3eacd71af445.png)
 ![Screen Shot 2022-07-07 at 1 24 24 AM](https://user-images.githubusercontent.com/50627842/177698473-5c0206a3-0bcc-40ac-872b-df0d2c15635f.png)
 ![Screen Shot 2022-07-07 at 1 24 32 AM](https://user-images.githubusercontent.com/50627842/177698481-00033a5c-06fa-4379-9d3f-59ad71d36f80.png)
